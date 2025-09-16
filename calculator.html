@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KTU CGPA & Attendance Calculator</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; }
+  header { background: #2b2b72; color: white; text-align: center; padding: 15px 0; }
+  .tabs { display: flex; justify-content: center; margin: 20px 0; }
+  .tab { padding: 10px 20px; margin: 0 5px; background: #ddd; cursor: pointer; border-radius: 5px; }
+  .tab.active { background: #2b2b72; color: white; }
+  .container { max-width: 500px; margin: auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  input, select, button { width: 100%; padding: 10px; margin: 5px 0; border-radius: 5px; border: 1px solid #ccc; }
+  button { background: #2b2b72; color: white; border: none; cursor: pointer; }
+  button:hover { background: #1a1a5a; }
+  .result { margin-top: 15px; font-weight: bold; text-align: center; }
+  .subject-row { display: flex; gap: 5px; margin-bottom: 5px; }
+  .subject-row input, .subject-row select { flex: 1; }
+  .small-btn { width: auto; padding: 5px 10px; margin-left: 5px; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>KTU CGPA & Attendance Calculator</h1>
+</header>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('attendance')">Attendance</div>
+  <div class="tab" onclick="showTab('cgpa')">CGPA</div>
+</div>
+
+<div class="container" id="attendanceTab">
+  <h2>Attendance Calculator</h2>
+  <input type="number" id="totalClasses" placeholder="Total Classes Conducted">
+  <input type="number" id="attendedClasses" placeholder="Classes Attended">
+  <input type="number" id="targetPercent" placeholder="Target Percentage (default 75)" value="75">
+  <button onclick="calculateAttendance()">Calculate Attendance</button>
+  <div class="result" id="attendanceResult"></div>
+</div>
+
+<div class="container" id="cgpaTab" style="display:none;">
+  <h2>CGPA Calculator</h2>
+  <div id="subjectsContainer"></div>
+  <button onclick="addSubject()">Add Subject</button>
+  <button onclick="calculateCGPA()">Calculate CGPA</button>
+  <div class="result" id="cgpaResult"></div>
+</div>
+
+<script>
+let subjects = JSON.parse(localStorage.getItem('subjects')) || [];
+
+function showTab(tab) {
+  document.getElementById('attendanceTab').style.display = tab==='attendance'?'block':'none';
+  document.getElementById('cgpaTab').style.display = tab==='cgpa'?'block':'none';
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function calculateAttendance() {
+  let total = parseInt(document.getElementById('totalClasses').value);
+  let attended = parseInt(document.getElementById('attendedClasses').value);
+  let target = parseInt(document.getElementById('targetPercent').value) || 75;
+  if(isNaN(total)||isNaN(attended)||total<=0){ 
+    alert("Enter valid numbers"); 
+    return; 
+  }
+  let percent = (attended/total*100).toFixed(2);
+  let resultText = `Attendance: ${percent}% - `;
+  if(percent>=target){
+    let maxBunk = Math.floor(attended/target*100 - total);
+    resultText += `Safe ✅ You can bunk up to ${maxBunk>0?maxBunk:0} classes`;
+  } else {
+    let need = Math.ceil((target*total - attended*100)/(100-target));
+    resultText += `Below target ⚠️ Attend next ${need} classes to reach ${target}%`;
+  }
+  document.getElementById('attendanceResult').innerText = resultText;
+}
+
+function gradeToPoint(g){ 
+  const map = {'A+':10,'A':9,'B+':8,'B':7,'C':6,'P':5,'F':0}; 
+  return map[g]||0; 
+}
+
+function addSubject(name='', credit='', grade='') {
+  subjects.push({name:name, credit:credit, grade:grade});
+  renderSubjects();
+  localStorage.setItem('subjects', JSON.stringify(subjects));
+}
+
+function removeSubject(index){
+  subjects.splice(index,1);
+  renderSubjects();
+  localStorage.setItem('subjects', JSON.stringify(subjects));
+}
+
+function renderSubjects(){
+  let container = document.getElementById('subjectsContainer');
+  container.innerHTML = '';
+  subjects.forEach((s,i)=>{
+    let div = document.createElement('div'); div.className='subject-row';
+    div.innerHTML = `
+      <input placeholder="Subject Name" value="${s.name}" oninput="subjects[${i}].name=this.value; saveSubjects()">
+      <input type="number" placeholder="Credits" value="${s.credit}" oninput="subjects[${i}].credit=this.value; saveSubjects()">
+      <select onchange="subjects[${i}].grade=this.value; saveSubjects()">
+        <option value="">Grade</option>
+        <option ${s.grade=='A+'?'selected':''}>A+</option>
+        <option ${s.grade=='A'?'selected':''}>A</option>
+        <option ${s.grade=='B+'?'selected':''}>B+</option>
+        <option ${s.grade=='B'?'selected':''}>B</option>
+        <option ${s.grade=='C'?'selected':''}>C</option>
+        <option ${s.grade=='P'?'selected':''}>P</option>
+        <option ${s.grade=='F'?'selected':''}>F</option>
+      </select>
+      <button class="small-btn" onclick="removeSubject(${i})">Remove</button>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function saveSubjects(){ localStorage.setItem('subjects', JSON.stringify(subjects)); }
+
+function calculateCGPA(){
+  let totalPoints=0,totalCredits=0;
+  subjects.forEach(s=>{
+    let credits=parseFloat(s.credit);
+    let points = gradeToPoint(s.grade);
+    if(!isNaN(credits)){ totalPoints+=points*credits; totalCredits+=credits; }
+  });
+  if(totalCredits===0){ alert("Enter credits and grades"); return; }
+  let cgpa = (totalPoints/totalCredits).toFixed(2);
+  document.getElementById('cgpaResult').innerText = `CGPA: ${cgpa}`;
+}
+
+// Initial render
+renderSubjects();
+</script>
+
+</body>
+</html>
