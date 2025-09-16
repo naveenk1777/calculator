@@ -3,27 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KTU CGPA & Attendance Calculator</title>
+<title>KTU Toolkit V2</title>
 <style>
-  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; }
-  header { background: #2b2b72; color: white; text-align: center; padding: 15px 0; }
-  .tabs { display: flex; justify-content: center; margin: 20px 0; }
-  .tab { padding: 10px 20px; margin: 0 5px; background: #ddd; cursor: pointer; border-radius: 5px; }
-  .tab.active { background: #2b2b72; color: white; }
-  .container { max-width: 500px; margin: auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-  input, select, button { width: 100%; padding: 10px; margin: 5px 0; border-radius: 5px; border: 1px solid #ccc; }
-  button { background: #2b2b72; color: white; border: none; cursor: pointer; }
-  button:hover { background: #1a1a5a; }
-  .result { margin-top: 15px; font-weight: bold; text-align: center; }
-  .subject-row { display: flex; gap: 5px; margin-bottom: 5px; }
-  .subject-row input, .subject-row select { flex: 1; }
-  .small-btn { width: auto; padding: 5px 10px; margin-left: 5px; font-size: 12px; }
+  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; }
+  header { background:#2b2b72; color:white; text-align:center; padding:15px 0; }
+  .tabs { display:flex; justify-content:center; margin:20px 0; }
+  .tab { padding:10px 20px; margin:0 5px; background:#ddd; cursor:pointer; border-radius:5px; }
+  .tab.active { background:#2b2b72; color:white; }
+  .container { max-width:600px; margin:auto; padding:20px; background:white; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+  input, select, button { width:100%; padding:10px; margin:5px 0; border-radius:5px; border:1px solid #ccc; }
+  button { background:#2b2b72; color:white; border:none; cursor:pointer; }
+  button:hover { background:#1a1a5a; }
+  .result { margin-top:15px; font-weight:bold; text-align:center; white-space:pre-line; }
+  .subject-row { display:flex; gap:5px; margin-bottom:5px; }
+  .subject-row input, .subject-row select { flex:1; }
+  .small-btn { width:auto; padding:5px 10px; margin-left:5px; font-size:12px; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>KTU CGPA & Attendance Calculator</h1>
+  <h1>KTU Toolkit V2</h1>
 </header>
 
 <div class="tabs">
@@ -31,79 +31,122 @@
   <div class="tab" onclick="showTab('cgpa')">CGPA</div>
 </div>
 
+<!-- Attendance Tab -->
 <div class="container" id="attendanceTab">
-  <h2>Attendance Calculator</h2>
-  <input type="number" id="totalClasses" placeholder="Total Classes Conducted">
-  <input type="number" id="attendedClasses" placeholder="Classes Attended">
-  <input type="number" id="targetPercent" placeholder="Target Percentage (default 75)" value="75">
-  <button onclick="calculateAttendance()">Calculate Attendance</button>
+  <h2>Attendance Dashboard</h2>
+  <div id="attendanceContainer"></div>
+  <button onclick="addAttendanceSubject()">Add Subject</button>
+  <button onclick="calculateAttendanceAll()">Calculate Attendance</button>
   <div class="result" id="attendanceResult"></div>
 </div>
 
+<!-- CGPA Tab -->
 <div class="container" id="cgpaTab" style="display:none;">
   <h2>CGPA Calculator</h2>
-  <div id="subjectsContainer"></div>
-  <button onclick="addSubject()">Add Subject</button>
-  <button onclick="calculateCGPA()">Calculate CGPA</button>
+  <select id="department" onchange="loadDepartmentPreset()">
+    <option value="">Select Department (Preset)</option>
+    <option value="CSE">CSE</option>
+    <option value="ECE">ECE</option>
+    <option value="ME">ME</option>
+    <option value="EE">EE</option>
+    <option value="CE">CE</option>
+  </select>
+  <div id="cgpaContainer"></div>
+  <button onclick="addCGPASubject()">Add Subject</button>
+  <button onclick="calculateCGPAAll()">Calculate CGPA</button>
+  <button onclick="shareCGPA()">Share Snapshot</button>
   <div class="result" id="cgpaResult"></div>
 </div>
 
 <script>
-let subjects = JSON.parse(localStorage.getItem('subjects')) || [];
-
+// ========== TABS ==========
 function showTab(tab) {
   document.getElementById('attendanceTab').style.display = tab==='attendance'?'block':'none';
   document.getElementById('cgpaTab').style.display = tab==='cgpa'?'block':'none';
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   event.target.classList.add('active');
 }
 
-function calculateAttendance() {
-  let total = parseInt(document.getElementById('totalClasses').value);
-  let attended = parseInt(document.getElementById('attendedClasses').value);
-  let target = parseInt(document.getElementById('targetPercent').value) || 75;
-  if(isNaN(total)||isNaN(attended)||total<=0){ 
-    alert("Enter valid numbers"); 
-    return; 
-  }
-  let percent = (attended/total*100).toFixed(2);
-  let resultText = `Attendance: ${percent}% - `;
-  if(percent>=target){
-    let maxBunk = Math.floor(attended/target*100 - total);
-    resultText += `Safe ✅ You can bunk up to ${maxBunk>0?maxBunk:0} classes`;
-  } else {
-    let need = Math.ceil((target*total - attended*100)/(100-target));
-    resultText += `Below target ⚠️ Attend next ${need} classes to reach ${target}%`;
-  }
-  document.getElementById('attendanceResult').innerText = resultText;
+// ========== ATTENDANCE ==========
+let attendanceSubjects = JSON.parse(localStorage.getItem('attendanceSubjects')) || [];
+
+function addAttendanceSubject(name='', total='', attended='') {
+  attendanceSubjects.push({name,total,attended});
+  renderAttendance();
+  saveAttendance();
 }
 
-function gradeToPoint(g){ 
-  const map = {'A+':10,'A':9,'B+':8,'B':7,'C':6,'P':5,'F':0}; 
-  return map[g]||0; 
+function removeAttendanceSubject(i){
+  attendanceSubjects.splice(i,1);
+  renderAttendance();
+  saveAttendance();
 }
 
-function addSubject(name='', credit='', grade='') {
-  subjects.push({name:name, credit:credit, grade:grade});
-  renderSubjects();
-  localStorage.setItem('subjects', JSON.stringify(subjects));
-}
-
-function removeSubject(index){
-  subjects.splice(index,1);
-  renderSubjects();
-  localStorage.setItem('subjects', JSON.stringify(subjects));
-}
-
-function renderSubjects(){
-  let container = document.getElementById('subjectsContainer');
+function renderAttendance(){
+  let container = document.getElementById('attendanceContainer');
   container.innerHTML = '';
-  subjects.forEach((s,i)=>{
-    let div = document.createElement('div'); div.className='subject-row';
-    div.innerHTML = `
-      <input placeholder="Subject Name" value="${s.name}" oninput="subjects[${i}].name=this.value; saveSubjects()">
-      <input type="number" placeholder="Credits" value="${s.credit}" oninput="subjects[${i}].credit=this.value; saveSubjects()">
-      <select onchange="subjects[${i}].grade=this.value; saveSubjects()">
+  attendanceSubjects.forEach((s,i)=>{
+    let div=document.createElement('div'); div.className='subject-row';
+    div.innerHTML=`
+      <input placeholder="Subject Name" value="${s.name}" oninput="attendanceSubjects[${i}].name=this.value; saveAttendance()">
+      <input type="number" placeholder="Total Classes" value="${s.total}" oninput="attendanceSubjects[${i}].total=this.value; saveAttendance()">
+      <input type="number" placeholder="Classes Attended" value="${s.attended}" oninput="attendanceSubjects[${i}].attended=this.value; saveAttendance()">
+      <button class="small-btn" onclick="removeAttendanceSubject(${i})">Remove</button>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function calculateAttendanceAll(){
+  let result='';
+  let totalPercent=0, count=0;
+  attendanceSubjects.forEach(s=>{
+    let t=parseInt(s.total), a=parseInt(s.attended);
+    if(!t || !a) return;
+    let percent=(a/t*100).toFixed(2);
+    totalPercent+=parseFloat(percent); count++;
+    let status=percent>=75?'✅ Safe':percent>=70?'⚠️ Near':'❌ Danger';
+    result+=`${s.name || 'Subject'}: ${percent}% ${status}\n`;
+  });
+  if(count>0) result+=`Semester Average: ${(totalPercent/count).toFixed(2)}%`;
+  document.getElementById('attendanceResult').innerText=result || 'Add subjects first';
+}
+
+function saveAttendance(){ localStorage.setItem('attendanceSubjects',JSON.stringify(attendanceSubjects)); }
+
+// ========== CGPA ==========
+let cgpaSubjects = JSON.parse(localStorage.getItem('cgpaSubjects')) || [];
+
+const departmentPresets={
+  'CSE':[ {name:'Maths',credit:4},{name:'DSA',credit:3},{name:'OOP',credit:3} ],
+  'ECE':[ {name:'Signals',credit:4},{name:'Analog',credit:3},{name:'Digital',credit:3} ],
+  'ME':[ {name:'Thermodynamics',credit:4},{name:'Mechanics',credit:3},{name:'Material',credit:3} ],
+  'EE':[ {name:'Circuits',credit:4},{name:'Electronics',credit:3},{name:'Power',credit:3} ],
+  'CE':[ {name:'Structures',credit:4},{name:'Survey',credit:3},{name:'Concrete',credit:3} ]
+};
+
+function loadDepartmentPreset(){
+  let dep=document.getElementById('department').value;
+  if(!dep) return;
+  cgpaSubjects=departmentPresets[dep].map(s=>({...s,grade:''}));
+  renderCGPA();
+  saveCGPA();
+}
+
+function gradeToPoint(g){ const map={'A+':10,'A':9,'B+':8,'B':7,'C':6,'P':5,'F':0}; return map[g]||0; }
+
+function addCGPASubject(name='',credit='',grade=''){ cgpaSubjects.push({name,credit,grade}); renderCGPA(); saveCGPA(); }
+function removeCGPASubject(i){ cgpaSubjects.splice(i,1); renderCGPA(); saveCGPA(); }
+
+function renderCGPA(){
+  let container=document.getElementById('cgpaContainer');
+  container.innerHTML='';
+  cgpaSubjects.forEach((s,i)=>{
+    let div=document.createElement('div'); div.className='subject-row';
+    div.innerHTML=`
+      <input placeholder="Subject Name" value="${s.name}" oninput="cgpaSubjects[${i}].name=this.value; saveCGPA()">
+      <input type="number" placeholder="Credits" value="${s.credit}" oninput="cgpaSubjects[${i}].credit=this.value; saveCGPA()">
+      <select onchange="cgpaSubjects[${i}].grade=this.value; saveCGPA()">
         <option value="">Grade</option>
         <option ${s.grade=='A+'?'selected':''}>A+</option>
         <option ${s.grade=='A'?'selected':''}>A</option>
@@ -113,30 +156,40 @@ function renderSubjects(){
         <option ${s.grade=='P'?'selected':''}>P</option>
         <option ${s.grade=='F'?'selected':''}>F</option>
       </select>
-      <button class="small-btn" onclick="removeSubject(${i})">Remove</button>
+      <button class="small-btn" onclick="removeCGPASubject(${i})">Remove</button>
     `;
     container.appendChild(div);
   });
 }
 
-function saveSubjects(){ localStorage.setItem('subjects', JSON.stringify(subjects)); }
-
-function calculateCGPA(){
+function calculateCGPAAll(){
   let totalPoints=0,totalCredits=0;
-  subjects.forEach(s=>{
-    let credits=parseFloat(s.credit);
-    let points = gradeToPoint(s.grade);
-    if(!isNaN(credits)){ totalPoints+=points*credits; totalCredits+=credits; }
+  cgpaSubjects.forEach(s=>{
+    let c=parseFloat(s.credit), p=gradeToPoint(s.grade);
+    if(!isNaN(c)) { totalPoints+=c*p; totalCredits+=c; }
   });
   if(totalCredits===0){ alert("Enter credits and grades"); return; }
-  let cgpa = (totalPoints/totalCredits).toFixed(2);
-  document.getElementById('cgpaResult').innerText = `CGPA: ${cgpa}`;
+  document.getElementById('cgpaResult').innerText=`CGPA: ${(totalPoints/totalCredits).toFixed(2)}`;
 }
 
-// Initial render
-renderSubjects();
+function saveCGPA(){ localStorage.setItem('cgpaSubjects',JSON.stringify(cgpaSubjects)); }
+
+function shareCGPA(){
+  if(cgpaSubjects.length===0){ alert("Add subjects first"); return; }
+  let text='My CGPA Snapshot:\n';
+  cgpaSubjects.forEach(s=>text+=`${s.name || 'Subject'}: ${s.grade || '-'} (${s.credit}cr)\n`);
+  let totalPoints=0,totalCredits=0;
+  cgpaSubjects.forEach(s=>{ let c=parseFloat(s.credit), p=gradeToPoint(s.grade); if(!isNaN(c)){totalPoints+=c*p; totalCredits+=c;} });
+  if(totalCredits>0) text+=`CGPA: ${(totalPoints/totalCredits).toFixed(2)}`;
+  navigator.clipboard.writeText(text).then(()=>alert("Snapshot copied to clipboard!"));
+}
+
+// ========== INIT ==========
+attendanceSubjects.length===0 && addAttendanceSubject();
+cgpaSubjects.length===0 && addCGPASubject();
+renderAttendance();
+renderCGPA();
 </script>
 
 </body>
-
 </html>
