@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KTU Tools - ECE 2019</title>
+<title>KTU Tools - 2019 Scheme</title>
 <style>
   body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; color:#333; }
   header { background:#004080; color:white; text-align:center; padding:15px; }
@@ -13,14 +13,14 @@
   .btn:hover { background:#003060; }
   .btn:disabled { background:#ccc; cursor:not-allowed; }
   .input-group { margin:10px 0; }
-  select, input { width:100%; padding:10px; font-size:16px; border:1px solid #ccc; border-radius:6px; }
-  .subject-row { display:flex; gap:10px; margin-bottom:5px; }
+  select, input { width:100%; padding:10px; font-size:16px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box; }
+  .subject-row { display:flex; gap:10px; margin-bottom:5px; align-items: center; }
   .subject-row span { flex:2; align-self:center; }
   .subject-row select { flex:1; }
   .result { margin-top:10px; padding:10px; background:#f0f8ff; border-left:4px solid #004080; white-space:pre-line; }
   .error { color:red; font-weight:bold; margin-top:10px; }
   @media (max-width:600px){
-    .subject-row { flex-direction:column; }
+    .subject-row { flex-direction:column; align-items: stretch; }
     .subject-row span, .subject-row select { width:100%; }
   }
 </style>
@@ -44,8 +44,10 @@
     <select id="department">
       <option value="">-- Select Department --</option>
       <option value="ECE">ECE</option>
-      <option value="EEE">EEE (Coming Soon)</option>
-      <option value="CSE">CSE (Coming Soon)</option>
+      <option value="CSE">CSE</option>
+      <option value="EEE">EEE</option>
+      <option value="ME">ME</option>
+      <option value="CE">CE</option>
     </select>
   </div>
   <div class="input-group">
@@ -53,7 +55,7 @@
     <select id="scheme">
       <option value="">-- Select Scheme --</option>
       <option value="2019">2019</option>
-      <option value="2015">2015 (Coming Soon)</option>
+      <option value="2015" disabled>2015 (Coming Soon)</option>
     </select>
   </div>
   <button class="btn" onclick="loadSemesters()">Load</button>
@@ -105,7 +107,6 @@ const gradeMap = {
 let syllabusData = {};
 let currentResults = {};
 
-// ===== Navigation Functions =====
 function showCGPA(){
   document.getElementById('homeScreen').style.display='none';
   document.getElementById('cgpaScreen').style.display='block';
@@ -120,60 +121,40 @@ function goHome(){
   document.getElementById('homeScreen').style.display='block';
 }
 
-// ===== NEW: LocalStorage Functions =====
-function saveGrade(selectElement) {
-  localStorage.setItem('grade_' + selectElement.id, selectElement.value);
-}
-
-function loadGrades() {
-  Object.keys(syllabusData).forEach(sem => {
-    syllabusData[sem].forEach((sub, i) => {
-      const gradeId = `${sem}_${i}`;
-      const savedGrade = localStorage.getItem('grade_' + gradeId);
-      if (savedGrade) {
-        document.getElementById(gradeId).value = savedGrade;
-      }
-    });
-  });
-}
-
-function clearGrades() {
-  if (confirm("Are you sure you want to clear all saved grades? This cannot be undone.")) {
-    Object.keys(syllabusData).forEach(sem => {
-      syllabusData[sem].forEach((sub, i) => {
-        const gradeId = `${sem}_${i}`;
-        localStorage.removeItem('grade_' + gradeId);
-      });
-    });
-    renderSemesters(); // Re-render to show cleared dropdowns
-    document.getElementById('cgpaResult').innerText = "";
-    Object.keys(currentResults).forEach(key => delete currentResults[key]);
-    alert("All saved grades have been cleared.");
-  }
-}
-
-// ===== CGPA Calculator Functions =====
-function loadSemesters(){
+// ===== UPDATED loadSemesters FUNCTION =====
+function loadSemesters() {
   const dept = document.getElementById('department').value;
   const scheme = document.getElementById('scheme').value;
-  if(dept==='ECE' && scheme==='2019'){
-    fetch('ece2019.json')
-    .then(res=>{
-      if(!res.ok) throw new Error("File not found");
-      return res.json();
-    })
-    .then(data=>{
-      syllabusData = data;
-      renderSemesters();
-      loadGrades(); // MODIFIED: Load grades after rendering
-      document.getElementById('cgpaControls').style.display='block';
-      document.getElementById('errorMsg').innerText='';
-    })
-    .catch(err=>{
-      document.getElementById('errorMsg').innerText="❌ Could not load syllabus data. Check file path or name.";
-    });
+  
+  if (!dept || !scheme) {
+    alert("Please select both a department and a scheme.");
+    return;
+  }
+
+  if (scheme === '2019') {
+    fetch('syllabus2019.json') // <-- Fetches the new single file
+      .then(res => {
+        if (!res.ok) throw new Error("File not found");
+        return res.json();
+      })
+      .then(data => {
+        if (data[dept]) {
+          syllabusData = data[dept]; // <-- Selects the data for the chosen department
+          renderSemesters();
+          document.getElementById('cgpaControls').style.display = 'block';
+          document.getElementById('errorMsg').innerText = '';
+        } else {
+          alert(`Syllabus for ${dept} (2019 Scheme) is not available yet.`);
+          document.getElementById('semesters').innerHTML = '';
+          document.getElementById('cgpaControls').style.display = 'none';
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById('errorMsg').innerText = "❌ Could not load syllabus data. Check file path or name.";
+      });
   } else {
-    alert("Only ECE 2019 is available now.");
+    alert("Only the 2019 scheme is available now.");
   }
 }
 
@@ -189,8 +170,9 @@ function renderSemesters(){
       row.className='subject-row';
       row.innerHTML=`
         <span>${sub.code} – ${sub.name} (${sub.credit}cr)</span>
-        <select id="${sem}_${i}" onchange="saveGrade(this)"> <option value="">Grade</option>
-          ${Object.keys(gradeMap).map(g=>`<option>${g}</option>`).join('')}
+        <select id="${sem}_${i}">
+          <option value="">Grade</option>
+          ${Object.keys(gradeMap).map(g=>`<option value="${g}">${g}</option>`).join('')}
         </select>`;
       div.appendChild(row);
     });
@@ -249,11 +231,13 @@ function shareResult(){
   if(currentResults['CGPA']) text+=`Overall CGPA: ${currentResults['CGPA']}`;
   if(text===''){ alert("Please calculate SGPA or CGPA first."); return; }
   navigator.clipboard.writeText(text).then(()=>{
-    document.getElementById('shareMsg').innerText="Result copied to clipboard. You can paste and share it.";
+    document.getElementById('shareMsg').innerText="✅ Result copied to clipboard!";
+  }, ()=>{
+    document.getElementById('shareMsg').innerText="❌ Failed to copy.";
   });
 }
 
-// ===== Attendance Calculator Function =====
+// ===== Fixed Attendance Logic =====
 function calcAttendance(){
   let attended=parseInt(document.getElementById('attended').value);
   let total=parseInt(document.getElementById('total').value);
@@ -279,4 +263,3 @@ function calcAttendance(){
 
 </body>
 </html>
-
