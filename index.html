@@ -3,192 +3,174 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KTU Toolkit V2</title>
+<title>KTU Tools - CGPA & Attendance (ECE 2019)</title>
 <style>
-  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; }
-  header { background:#2b2b72; color:white; text-align:center; padding:15px 0; }
-  .tabs { display:flex; justify-content:center; margin:20px 0; }
-  .tab { padding:10px 20px; margin:0 5px; background:#ddd; cursor:pointer; border-radius:5px; }
-  .tab.active { background:#2b2b72; color:white; }
-  .container { max-width:600px; margin:auto; padding:20px; background:white; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
-  input, select, button { width:100%; padding:10px; margin:5px 0; border-radius:5px; border:1px solid #ccc; }
-  button { background:#2b2b72; color:white; border:none; cursor:pointer; }
-  button:hover { background:#1a1a5a; }
-  .result { margin-top:15px; font-weight:bold; text-align:center; white-space:pre-line; }
-  .subject-row { display:flex; gap:5px; margin-bottom:5px; }
-  .subject-row input, .subject-row select { flex:1; }
-  .small-btn { width:auto; padding:5px 10px; margin-left:5px; font-size:12px; }
+  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; color:#333; }
+  header { background:#004080; color:white; text-align:center; padding:15px; }
+  .container { max-width:900px; margin:20px auto; padding:20px; background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+  h2 { color:#004080; margin-top:0; }
+  .input-group { margin:10px 0; }
+  label { display:block; margin-bottom:5px; font-weight:bold; }
+  input, select { width:100%; padding:10px; font-size:16px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box; }
+  .btn { margin-top:10px; padding:10px 20px; font-size:16px; background:#004080; color:white; border:none; border-radius:6px; cursor:pointer; }
+  .btn:hover { background:#003060; }
+  .result { margin-top:10px; padding:10px; background:#f0f8ff; border-left:4px solid #004080; white-space:pre-line; }
+  .subject-row { display:flex; gap:10px; margin-bottom:5px; }
+  .subject-row span { flex:2; align-self:center; }
+  .subject-row select { flex:1; }
+  @media (max-width:600px){
+    .subject-row { flex-direction:column; }
+    .subject-row span, .subject-row select { width:100%; }
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>KTU Toolkit V2</h1>
+  <h1>KTU ECE 2019 - CGPA & Attendance Calculator</h1>
 </header>
 
-<div class="tabs">
-  <div class="tab active" onclick="showTab('attendance')">Attendance</div>
-  <div class="tab" onclick="showTab('cgpa')">CGPA</div>
+<div class="container" id="cgpaCalculator">
+  <h2>CGPA Calculator (ECE 2019 Scheme)</h2>
+  <div id="semesters"></div>
+  <button class="btn" onclick="shareResult()">Share Result</button>
+  <div class="result" id="cgpaResult"></div>
+  <div id="shareMsg" style="margin-top:5px;color:green;font-weight:bold;"></div>
 </div>
 
-<!-- Attendance Tab -->
-<div class="container" id="attendanceTab">
-  <h2>Attendance Dashboard</h2>
-  <div id="attendanceContainer"></div>
-  <button onclick="addAttendanceSubject()">Add Subject</button>
-  <button onclick="calculateAttendanceAll()">Calculate Attendance</button>
+<div class="container" id="attendanceCalculator">
+  <h2>Attendance Calculator</h2>
+  <div class="input-group">
+    <label>Classes Attended</label>
+    <input type="number" id="attended" placeholder="Enter attended classes">
+  </div>
+  <div class="input-group">
+    <label>Total Classes</label>
+    <input type="number" id="total" placeholder="Enter total classes">
+  </div>
+  <div class="input-group">
+    <label>Target %</label>
+    <select id="target">
+      <option value="75">75%</option>
+      <option value="80">80%</option>
+      <option value="85">85%</option>
+      <option value="90">90%</option>
+      <option value="95">95%</option>
+    </select>
+  </div>
+  <button class="btn" onclick="calcAttendance()">Calculate Attendance</button>
   <div class="result" id="attendanceResult"></div>
 </div>
 
-<!-- CGPA Tab -->
-<div class="container" id="cgpaTab" style="display:none;">
-  <h2>CGPA Calculator</h2>
-  <select id="department" onchange="loadDepartmentPreset()">
-    <option value="">Select Department (Preset)</option>
-    <option value="CSE">CSE</option>
-    <option value="ECE">ECE</option>
-    <option value="ME">ME</option>
-    <option value="EE">EE</option>
-    <option value="CE">CE</option>
-  </select>
-  <div id="cgpaContainer"></div>
-  <button onclick="addCGPASubject()">Add Subject</button>
-  <button onclick="calculateCGPAAll()">Calculate CGPA</button>
-  <button onclick="shareCGPA()">Share Snapshot</button>
-  <div class="result" id="cgpaResult"></div>
-</div>
-
 <script>
-// ========== TABS ==========
-function showTab(tab) {
-  document.getElementById('attendanceTab').style.display = tab==='attendance'?'block':'none';
-  document.getElementById('cgpaTab').style.display = tab==='cgpa'?'block':'none';
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  event.target.classList.add('active');
-}
+// ===== Grading Map =====
+const gradeMap = { 'S':10, 'A':9, 'B':8, 'C':7, 'D':6, 'E':5, 'F':0 };
 
-// ========== ATTENDANCE ==========
-let attendanceSubjects = JSON.parse(localStorage.getItem('attendanceSubjects')) || [];
-
-function addAttendanceSubject(name='', total='', attended='') {
-  attendanceSubjects.push({name,total,attended});
-  renderAttendance();
-  saveAttendance();
-}
-
-function removeAttendanceSubject(i){
-  attendanceSubjects.splice(i,1);
-  renderAttendance();
-  saveAttendance();
-}
-
-function renderAttendance(){
-  let container = document.getElementById('attendanceContainer');
-  container.innerHTML = '';
-  attendanceSubjects.forEach((s,i)=>{
-    let div=document.createElement('div'); div.className='subject-row';
-    div.innerHTML=`
-      <input placeholder="Subject Name" value="${s.name}" oninput="attendanceSubjects[${i}].name=this.value; saveAttendance()">
-      <input type="number" placeholder="Total Classes" value="${s.total}" oninput="attendanceSubjects[${i}].total=this.value; saveAttendance()">
-      <input type="number" placeholder="Classes Attended" value="${s.attended}" oninput="attendanceSubjects[${i}].attended=this.value; saveAttendance()">
-      <button class="small-btn" onclick="removeAttendanceSubject(${i})">Remove</button>
-    `;
-    container.appendChild(div);
-  });
-}
-
-function calculateAttendanceAll(){
-  let result='';
-  let totalPercent=0, count=0;
-  attendanceSubjects.forEach(s=>{
-    let t=parseInt(s.total), a=parseInt(s.attended);
-    if(!t || !a) return;
-    let percent=(a/t*100).toFixed(2);
-    totalPercent+=parseFloat(percent); count++;
-    let status=percent>=75?'✅ Safe':percent>=70?'⚠️ Near':'❌ Danger';
-    result+=`${s.name || 'Subject'}: ${percent}% ${status}\n`;
-  });
-  if(count>0) result+=`Semester Average: ${(totalPercent/count).toFixed(2)}%`;
-  document.getElementById('attendanceResult').innerText=result || 'Add subjects first';
-}
-
-function saveAttendance(){ localStorage.setItem('attendanceSubjects',JSON.stringify(attendanceSubjects)); }
-
-// ========== CGPA ==========
-let cgpaSubjects = JSON.parse(localStorage.getItem('cgpaSubjects')) || [];
-
-const departmentPresets={
-  'CSE':[ {name:'Maths',credit:4},{name:'DSA',credit:3},{name:'OOP',credit:3} ],
-  'ECE':[ {name:'Signals',credit:4},{name:'Analog',credit:3},{name:'Digital',credit:3} ],
-  'ME':[ {name:'Thermodynamics',credit:4},{name:'Mechanics',credit:3},{name:'Material',credit:3} ],
-  'EE':[ {name:'Circuits',credit:4},{name:'Electronics',credit:3},{name:'Power',credit:3} ],
-  'CE':[ {name:'Structures',credit:4},{name:'Survey',credit:3},{name:'Concrete',credit:3} ]
+// ===== ECE 2019 Scheme Subjects =====
+const ece2019 = {
+  "Semester 3":[
+    {name:"MAT 201 – PDE & Complex Analysis", credit:4},
+    {name:"ECT 201 – Solid State Devices", credit:4},
+    {name:"ECT 203 – Logic Circuit Design", credit:4},
+    {name:"ECT 205 – Network Theory", credit:4},
+    {name:"EST 200 – Design and Engineering", credit:2},
+    {name:"HUT 200 – Professional Ethics", credit:2},
+    {name:"MCN 201 – Sustainable Engineering", credit:0},
+    {name:"ECL 201 – Scientific Computing Lab", credit:2},
+    {name:"ECL 203 – Logic Design Lab", credit:2}
+  ]
+  // ⚡ Add Semester 1–8 here (same structure) when needed
 };
 
-function loadDepartmentPreset(){
-  let dep=document.getElementById('department').value;
-  if(!dep) return;
-  cgpaSubjects=departmentPresets[dep].map(s=>({...s,grade:''}));
-  renderCGPA();
-  saveCGPA();
-}
-
-function gradeToPoint(g){ const map={'A+':10,'A':9,'B+':8,'B':7,'C':6,'P':5,'F':0}; return map[g]||0; }
-
-function addCGPASubject(name='',credit='',grade=''){ cgpaSubjects.push({name,credit,grade}); renderCGPA(); saveCGPA(); }
-function removeCGPASubject(i){ cgpaSubjects.splice(i,1); renderCGPA(); saveCGPA(); }
-
-function renderCGPA(){
-  let container=document.getElementById('cgpaContainer');
-  container.innerHTML='';
-  cgpaSubjects.forEach((s,i)=>{
-    let div=document.createElement('div'); div.className='subject-row';
-    div.innerHTML=`
-      <input placeholder="Subject Name" value="${s.name}" oninput="cgpaSubjects[${i}].name=this.value; saveCGPA()">
-      <input type="number" placeholder="Credits" value="${s.credit}" oninput="cgpaSubjects[${i}].credit=this.value; saveCGPA()">
-      <select onchange="cgpaSubjects[${i}].grade=this.value; saveCGPA()">
-        <option value="">Grade</option>
-        <option ${s.grade=='A+'?'selected':''}>A+</option>
-        <option ${s.grade=='A'?'selected':''}>A</option>
-        <option ${s.grade=='B+'?'selected':''}>B+</option>
-        <option ${s.grade=='B'?'selected':''}>B</option>
-        <option ${s.grade=='C'?'selected':''}>C</option>
-        <option ${s.grade=='P'?'selected':''}>P</option>
-        <option ${s.grade=='F'?'selected':''}>F</option>
-      </select>
-      <button class="small-btn" onclick="removeCGPASubject(${i})">Remove</button>
-    `;
+// ===== Render Semesters =====
+function renderSemesters(){
+  let container = document.getElementById('semesters');
+  container.innerHTML = '';
+  Object.keys(ece2019).forEach((sem, idx)=>{
+    let div = document.createElement('div');
+    div.innerHTML = `<h3>${sem}</h3>`;
+    ece2019[sem].forEach((sub,j)=>{
+      let row = document.createElement('div');
+      row.className='subject-row';
+      row.innerHTML=`
+        <span>${sub.name} (${sub.credit}cr)</span>
+        <select onchange="calcSGPA('${sem}')">
+          <option value="">Grade</option>
+          <option>S</option><option>A</option><option>B</option>
+          <option>C</option><option>D</option><option>E</option><option>F</option>
+        </select>`;
+      div.appendChild(row);
+    });
+    div.innerHTML += `<div class="result" id="${sem}_sgpa">SGPA: -</div>`;
     container.appendChild(div);
   });
 }
+renderSemesters();
 
-function calculateCGPAAll(){
-  let totalPoints=0,totalCredits=0;
-  cgpaSubjects.forEach(s=>{
-    let c=parseFloat(s.credit), p=gradeToPoint(s.grade);
-    if(!isNaN(c)) { totalPoints+=c*p; totalCredits+=c; }
+// ===== Calculate SGPA per semester & CGPA =====
+function calcSGPA(sem){
+  let rows = document.querySelectorAll(`#semesters h3:contains('${sem}') ~ .subject-row`);
+}
+function calcAll(){
+  let totalPoints=0, totalCredits=0;
+  let output='';
+  Object.keys(ece2019).forEach(sem=>{
+    let semDiv = document.querySelector(`#semesters h3:contains('${sem}')`).parentNode;
+    let selects = semDiv.querySelectorAll('select');
+    let points=0, credits=0;
+    selects.forEach((sel,i)=>{
+      let grade=sel.value;
+      let credit=ece2019[sem][i].credit;
+      if(grade && credit>0){
+        points+=gradeMap[grade]*credit;
+        credits+=credit;
+      }
+    });
+    if(credits>0){
+      let sgpa=(points/credits).toFixed(2);
+      semDiv.querySelector(`#${sem}_sgpa`).innerText=`SGPA: ${sgpa}`;
+      totalPoints+=points;
+      totalCredits+=credits;
+      output+=`${sem} SGPA: ${sgpa}\n`;
+    }
   });
-  if(totalCredits===0){ alert("Enter credits and grades"); return; }
-  document.getElementById('cgpaResult').innerText=`CGPA: ${(totalPoints/totalCredits).toFixed(2)}`;
+  if(totalCredits>0){
+    let cgpa=(totalPoints/totalCredits).toFixed(2);
+    document.getElementById('cgpaResult').innerText=`Overall CGPA: ${cgpa}`;
+    return output+`Overall CGPA: ${cgpa}`;
+  } else {
+    document.getElementById('cgpaResult').innerText='Fill in grades to calculate CGPA';
+    return '';
+  }
 }
 
-function saveCGPA(){ localStorage.setItem('cgpaSubjects',JSON.stringify(cgpaSubjects)); }
-
-function shareCGPA(){
-  if(cgpaSubjects.length===0){ alert("Add subjects first"); return; }
-  let text='My CGPA Snapshot:\n';
-  cgpaSubjects.forEach(s=>text+=`${s.name || 'Subject'}: ${s.grade || '-'} (${s.credit}cr)\n`);
-  let totalPoints=0,totalCredits=0;
-  cgpaSubjects.forEach(s=>{ let c=parseFloat(s.credit), p=gradeToPoint(s.grade); if(!isNaN(c)){totalPoints+=c*p; totalCredits+=c;} });
-  if(totalCredits>0) text+=`CGPA: ${(totalPoints/totalCredits).toFixed(2)}`;
-  navigator.clipboard.writeText(text).then(()=>alert("Snapshot copied to clipboard!"));
+// ===== Share Result =====
+function shareResult(){
+  let text = calcAll();
+  if(!text){ alert("Please fill some grades first."); return; }
+  navigator.clipboard.writeText(text).then(()=>{
+    document.getElementById('shareMsg').innerText="Result copied to clipboard. You can paste and share it.";
+  });
 }
 
-// ========== INIT ==========
-attendanceSubjects.length===0 && addAttendanceSubject();
-cgpaSubjects.length===0 && addCGPASubject();
-renderAttendance();
-renderCGPA();
+// ===== Attendance Calculator =====
+function calcAttendance(){
+  let attended=parseInt(document.getElementById('attended').value);
+  let total=parseInt(document.getElementById('total').value);
+  let target=parseInt(document.getElementById('target').value);
+  if(isNaN(attended)||isNaN(total)||total<=0){ alert("Enter valid numbers"); return; }
+  let percent=(attended/total*100).toFixed(2);
+  let result=`Current Attendance: ${percent}%\n`;
+  if(percent>=target){
+    let maxBunk = Math.floor((attended*100/target)-total);
+    if(maxBunk<0) maxBunk=0;
+    result+=`✅ Safe. You can cut ${maxBunk} more classes.`;
+  } else {
+    let need=Math.ceil((target*total - attended*100)/(100-target));
+    result+=`⚠️ Below target. You must attend next ${need} classes.`;
+  }
+  document.getElementById('attendanceResult').innerText=result;
+}
 </script>
 
 </body>
