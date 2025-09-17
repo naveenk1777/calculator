@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KTU Tools - 2019 Scheme</title>
+<title>KTU Tools</title>
 <style>
   body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; color:#333; }
   header { background:#004080; color:white; text-align:center; padding:15px; }
@@ -55,6 +55,7 @@
     <select id="scheme">
       <option value="">-- Select Scheme --</option>
       <option value="2019">2019</option>
+      <option value="2024">2024</option>
       <option value="2015" disabled>2015 (Coming Soon)</option>
     </select>
   </div>
@@ -96,7 +97,7 @@
 </div>
 
 <script>
-// ===== Correct KTU 2019 Grading Map =====
+// ===== Correct KTU Grading Map =====
 const gradeMap = { 
   'S':10, 'A+':9.0, 'A':8.5, 
   'B+':8.0, 'B':7.5, 'C+':7.0, 
@@ -121,7 +122,7 @@ function goHome(){
   document.getElementById('homeScreen').style.display='block';
 }
 
-// ===== UPDATED loadSemesters FUNCTION =====
+// ===== UPDATED loadSemesters FUNCTION to handle different schemes =====
 function loadSemesters() {
   const dept = document.getElementById('department').value;
   const scheme = document.getElementById('scheme').value;
@@ -131,31 +132,39 @@ function loadSemesters() {
     return;
   }
 
+  // Determine the correct file to fetch based on the selected scheme
+  let fileName = '';
   if (scheme === '2019') {
-    fetch('syllabus2019.json') // <-- Fetches the new single file
-      .then(res => {
-        if (!res.ok) throw new Error("File not found");
-        return res.json();
-      })
-      .then(data => {
-        if (data[dept]) {
-          syllabusData = data[dept]; // <-- Selects the data for the chosen department
-          renderSemesters();
-          document.getElementById('cgpaControls').style.display = 'block';
-          document.getElementById('errorMsg').innerText = '';
-        } else {
-          alert(`Syllabus for ${dept} (2019 Scheme) is not available yet.`);
-          document.getElementById('semesters').innerHTML = '';
-          document.getElementById('cgpaControls').style.display = 'none';
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        document.getElementById('errorMsg').innerText = "❌ Could not load syllabus data. Check file path or name.";
-      });
+    fileName = 'syllabus2019.json';
+  } else if (scheme === '2024') {
+    fileName = 'syllabus2024.json';
   } else {
-    alert("Only the 2019 scheme is available now.");
+    alert(`The selected scheme (${scheme}) is not supported yet.`);
+    return;
   }
+
+  fetch(fileName)
+    .then(res => {
+      if (!res.ok) throw new Error(`File ${fileName} not found. Make sure it's uploaded to your GitHub repository.`);
+      return res.json();
+    })
+    .then(data => {
+      if (data[dept]) {
+        syllabusData = data[dept]; // Selects the data for the chosen department
+        renderSemesters();
+        document.getElementById('cgpaControls').style.display = 'block';
+        document.getElementById('errorMsg').innerText = '';
+      } else {
+        // Make the alert message dynamic
+        alert(`Syllabus for ${dept} (${scheme} Scheme) is not available in the data file.`);
+        document.getElementById('semesters').innerHTML = '';
+        document.getElementById('cgpaControls').style.display = 'none';
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      document.getElementById('errorMsg').innerText = `❌ Could not load syllabus data. ${err.message}`;
+    });
 }
 
 function renderSemesters(){
