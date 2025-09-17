@@ -1,82 +1,104 @@
 {
-  "Sem1": [
-    {"code": "MAT101", "name": "Calculus", "credit": 4},
-    {"code": "PHT100", "name": "Engineering Physics A", "credit": 4},
-    {"code": "CYT100", "name": "Engineering Chemistry A", "credit": 4},
-    {"code": "EST100", "name": "Engineering Mechanics", "credit": 3},
-    {"code": "EST110", "name": "Engineering Graphics", "credit": 3},
-    {"code": "HUN101", "name": "Life Skills", "credit": 2},
-    {"code": "MCN101", "name": "Sustainable Engineering", "credit": 0},
-    {"code": "EST120", "name": "Basics of Civil & Mechanical Engineering", "credit": 4}
-  ],
-  "Sem2": [
-    {"code": "MAT102", "name": "Differential Equations", "credit": 4},
-    {"code": "PHT102", "name": "Engineering Physics B", "credit": 4},
-    {"code": "CYT102", "name": "Engineering Chemistry B", "credit": 4},
-    {"code": "EST102", "name": "Programming in C", "credit": 3},
-    {"code": "EST130", "name": "Basics of Electrical & Electronics Engineering", "credit": 4},
-    {"code": "HUN102", "name": "Professional Communication", "credit": 2},
-    {"code": "MCN102", "name": "Constitution of India", "credit": 0}
-  ],
-  "Sem3": [
-    {"code": "MAT201", "name": "Partial Differential Equations and Complex Analysis", "credit": 4},
-    {"code": "ECT201", "name": "Solid State Devices", "credit": 4},
-    {"code": "ECT203", "name": "Logic Circuit Design", "credit": 4},
-    {"code": "ECT205", "name": "Network Theory", "credit": 4},
-    {"code": "EST200", "name": "Design and Engineering", "credit": 2},
-    {"code": "HUT200", "name": "Professional Ethics", "credit": 2},
-    {"code": "MCN201", "name": "Sustainable Engineering", "credit": 0},
-    {"code": "ECL201", "name": "Scientific Computing Lab", "credit": 2},
-    {"code": "ECL203", "name": "Logic Design Lab", "credit": 2}
-  ],
-  "Sem4": [
-    {"code": "MAT202", "name": "Probability Distributions, Transforms and Numerical Methods", "credit": 4},
-    {"code": "ECT202", "name": "Electronic Circuits", "credit": 4},
-    {"code": "ECT204", "name": "Signals and Systems", "credit": 4},
-    {"code": "ECT206", "name": "Computer Organization and Architecture", "credit": 3},
-    {"code": "HUT201", "name": "Humanities Elective", "credit": 3},
-    {"code": "MCN202", "name": "Disaster Management", "credit": 0},
-    {"code": "ECL202", "name": "Electronic Circuits Lab", "credit": 2},
-    {"code": "ECL204", "name": "Signals & Systems Lab", "credit": 2}
-  ],
-  "Sem5": [
-    {"code": "ECT301", "name": "Linear Integrated Circuits", "credit": 3},
-    {"code": "ECT303", "name": "Analog Communication", "credit": 3},
-    {"code": "ECT305", "name": "Digital Signal Processing", "credit": 4},
-    {"code": "ECT307", "name": "Microprocessor and Microcontroller", "credit": 4},
-    {"code": "HUT300", "name": "Management for Engineers", "credit": 3},
-    {"code": "MCN301", "name": "Environmental Studies", "credit": 0},
-    {"code": "ECL301", "name": "Analog Communication Lab", "credit": 2},
-    {"code": "ECL303", "name": "Integrated Circuits Lab", "credit": 2},
-    {"code": "ECL305", "name": "Microprocessor Lab", "credit": 2}
-  ],
-  "Sem6": [
-    {"code": "ECT302", "name": "Digital Communication", "credit": 4},
-    {"code": "ECT304", "name": "Control Systems", "credit": 3},
-    {"code": "ECT306", "name": "VLSI", "credit": 3},
-    {"code": "ECT308", "name": "Embedded Systems", "credit": 3},
-    {"code": "HUT301", "name": "Humanities Elective II", "credit": 3},
-    {"code": "MCN302", "name": "Industrial Safety", "credit": 0},
-    {"code": "ECL302", "name": "Communication Lab", "credit": 2},
-    {"code": "ECL304", "name": "VLSI Lab", "credit": 2},
-    {"code": "ECL306", "name": "Embedded Systems Lab", "credit": 2}
-  ],
-  "Sem7": [
-    {"code": "ECT401", "name": "Microwave & Antenna Theory", "credit": 3},
-    {"code": "ECT403", "name": "Optical Communication", "credit": 3},
-    {"code": "ECT405", "name": "Information Theory & Coding", "credit": 3},
-    {"code": "ECT407", "name": "Elective I", "credit": 3},
-    {"code": "ECT409", "name": "Elective II", "credit": 3},
-    {"code": "ECL401", "name": "Microwave & Optical Lab", "credit": 2},
-    {"code": "ECL403", "name": "Mini Project", "credit": 2},
-    {"code": "MCN401", "name": "Entrepreneurship", "credit": 0}
-  ],
-  "Sem8": [
-    {"code": "ECT402", "name": "Wireless Communication", "credit": 3},
-    {"code": "ECT404", "name": "Elective III", "credit": 3},
-    {"code": "ECT406", "name": "Elective IV", "credit": 3},
-    {"code": "ECL402", "name": "Project", "credit": 6},
-    {"code": "ECL404", "name": "Seminar", "credit": 2},
-    {"code": "MCN402", "name": "Comprehensive Viva", "credit": 0}
-  ]
+  "ECE_2019": {
+    "Semester 1": {
+      "TotalCredits": 17,
+      "Courses": [
+        { "Code": "MAT101", "Name": "LINEAR ALGEBRA AND CALCULUS", "Credits": 4 },
+        { "Code": "PHT100 / CYT100", "Name": "ENGINEERING PHYSICS A / ENGINEERING CHEMISTRY", "Credits": 4 },
+        { "Code": "EST100 / EST110", "Name": "ENGINEERING MECHANICS / ENGINEERING GRAPHICS", "Credits": 3 },
+        { "Code": "EST120 / EST130", "Name": "BASICS OF CIVIL & MECHANICAL / ELECTRICAL & ELECTRONICS ENGINEERING", "Credits": 4 },
+        { "Code": "HUN101", "Name": "LIFE SKILLS", "Credits": 0 },
+        { "Code": "PHL120 / CYL120", "Name": "ENGINEERING PHYSICS LAB / ENGINEERING CHEMISTRY LAB", "Credits": 1 },
+        { "Code": "ESL120 / ESL130", "Name": "CIVIL & MECHANICAL WORKSHOP / ELECTRICAL & ELECTRONICS WORKSHOP", "Credits": 1 }
+      ]
+    },
+    "Semester 2": {
+      "TotalCredits": 21,
+      "Courses": [
+        { "Code": "MAT102", "Name": "VECTOR CALCULUS, DIFFERENTIAL EQUATIONS AND TRANSFORMS", "Credits": 4 },
+        { "Code": "PHT100 / CYT100", "Name": "ENGINEERING PHYSICS A / ENGINEERING CHEMISTRY", "Credits": 4 },
+        { "Code": "EST100 / EST110", "Name": "ENGINEERING MECHANICS / ENGINEERING GRAPHICS", "Credits": 3 },
+        { "Code": "EST120 / EST130", "Name": "BASICS OF CIVIL & MECHANICAL / ELECTRICAL & ELECTRONICS ENGINEERING", "Credits": 4 },
+        { "Code": "HUT102", "Name": "PROFESSIONAL COMMUNICATION", "Credits": 0 },
+        { "Code": "EST102", "Name": "PROGRAMMING IN C", "Credits": 4 },
+        { "Code": "PHL120 / CYL120", "Name": "ENGINEERING PHYSICS LAB / ENGINEERING CHEMISTRY LAB", "Credits": 1 },
+        { "Code": "ESL120 / ESL130", "Name": "CIVIL & MECHANICAL WORKSHOP / ELECTRICAL & ELECTRONICS WORKSHOP", "Credits": 1 }
+      ]
+    },
+    "Semester 3": {
+      "TotalCredits": 22,
+      "Courses": [
+        { "Code": "MAT201", "Name": "PARTIAL DIFFERENTIAL EQUATION AND COMPLEX ANALYSIS", "Credits": 4 },
+        { "Code": "ECT201", "Name": "SOLID STATE DEVICES", "Credits": 4 },
+        { "Code": "ECT203", "Name": "LOGIC CIRCUIT DESIGN", "Credits": 4 },
+        { "Code": "ECT205", "Name": "NETWORK THEORY", "Credits": 4 },
+        { "Code": "EST200 / HUT200", "Name": "DESIGN AND ENGINEERING / PROFESSIONAL ETHICS", "Credits": 2 },
+        { "Code": "MCN201", "Name": "SUSTAINABLE ENGINEERING", "Credits": 0 },
+        { "Code": "ECL201", "Name": "SCIENTIFIC COMPUTING LAB", "Credits": 2 },
+        { "Code": "ECL203", "Name": "LOGIC DESIGN LAB", "Credits": 2 }
+      ]
+    },
+    "Semester 4": {
+      "TotalCredits": 22,
+      "Courses": [
+        { "Code": "MAT204", "Name": "PROBABILITY, RANDOM PROCESS AND NUMERICAL METHODS", "Credits": 4 },
+        { "Code": "ECT202", "Name": "ANALOG CIRCUITS", "Credits": 4 },
+        { "Code": "ECT204", "Name": "SIGNALS AND SYSTEMS", "Credits": 4 },
+        { "Code": "ECT206", "Name": "COMPUTER ARCHITECTURE AND MICROCONTROLLERS", "Credits": 4 },
+        { "Code": "EST200 / HUT200", "Name": "DESIGN AND ENGINEERING / PROFESSIONAL ETHICS", "Credits": 2 },
+        { "Code": "MCN202", "Name": "CONSTITUTION OF INDIA", "Credits": 0 },
+        { "Code": "ECL202", "Name": "ANALOG CIRCUITS AND SIMULATION LAB", "Credits": 2 },
+        { "Code": "ECL204", "Name": "MICROCONTROLLER LAB", "Credits": 2 }
+      ]
+    },
+    "Semester 5": {
+      "TotalCredits": 23,
+      "Courses": [
+        { "Code": "ECT301", "Name": "LINEAR INTEGRATED CIRCUITS", "Credits": 4 },
+        { "Code": "ECT303", "Name": "DIGITAL SIGNAL PROCESSING", "Credits": 4 },
+        { "Code": "ECT305", "Name": "ANALOG AND DIGITAL COMMUNICATION", "Credits": 4 },
+        { "Code": "ECT307", "Name": "CONTROL SYSTEMS", "Credits": 4 },
+        { "Code": "HUT300 / HUT310", "Name": "INDUSTRIAL ECONOMICS & FOREIGN TRADE / MANAGEMENT FOR ENGINEERS", "Credits": 3 },
+        { "Code": "MCN301", "Name": "DISASTER MANAGEMENT", "Credits": 0 },
+        { "Code": "ECL331", "Name": "ANALOG INTEGRATED CIRCUITS AND SIMULATION LAB", "Credits": 2 },
+        { "Code": "ECL333", "Name": "DIGITAL SIGNAL PROCESSING LAB", "Credits": 2 }
+      ]
+    },
+    "Semester 6": {
+      "TotalCredits": 23,
+      "Courses": [
+        { "Code": "ECT302", "Name": "ELECTROMAGNETICS", "Credits": 4 },
+        { "Code": "ECT304", "Name": "VLSI CIRCUIT DESIGN", "Credits": 4 },
+        { "Code": "ECT306", "Name": "INFORMATION THEORY AND CODING", "Credits": 4 },
+        { "Code": "ECTXXX", "Name": "PROGRAM ELECTIVE I", "Credits": 3 },
+        { "Code": "HUT300 / HUT310", "Name": "INDUSTRIAL ECONOMICS & FOREIGN TRADE / MANAGEMENT FOR ENGINEERS", "Credits": 3 },
+        { "Code": "ECT308", "Name": "COMPREHENSIVE COURSE WORK", "Credits": 1 },
+        { "Code": "ECL332", "Name": "COMMUNICATION LAB", "Credits": 2 },
+        { "Code": "ECD334", "Name": "MINIPROJECT", "Credits": 2 }
+      ]
+    },
+    "Semester 7": {
+      "TotalCredits": 15,
+      "Courses": [
+        { "Code": "ECT401", "Name": "WIRELESS COMMUNICATION", "Credits": 3 },
+        { "Code": "ECTXXX", "Name": "PROGRAM ELECTIVE II", "Credits": 3 },
+        { "Code": "ECTXXX", "Name": "OPEN ELECTIVE", "Credits": 3 },
+        { "Code": "MCN401", "Name": "INDUSTRIAL SAFETY ENGINEERING", "Credits": 0 },
+        { "Code": "ECL411", "Name": "ELECTROMAGNETICS LAB", "Credits": 2 },
+        { "Code": "ECQ413", "Name": "SEMINAR", "Credits": 2 },
+        { "Code": "ECD415", "Name": "PROJECT PHASE I", "Credits": 2 }
+      ]
+    },
+    "Semester 8": {
+      "TotalCredits": 17,
+      "Courses": [
+        { "Code": "ECT402", "Name": "INSTRUMENTATION", "Credits": 3 },
+        { "Code": "ECTXXX", "Name": "PROGRAM ELECTIVE III", "Credits": 3 },
+        { "Code": "ECTXXX", "Name": "PROGRAM ELECTIVE IV", "Credits": 3 },
+        { "Code": "ECTXXX", "Name": "PROGRAM ELECTIVE V", "Credits": 3 },
+        { "Code": "ECT404", "Name": "COMPREHENSIVE VIVA VOCE", "Credits": 1 },
+        { "Code": "ECD416", "Name": "PROJECT PHASE II", "Credits": 4 }
+      ]
+    }
+  }
 }
