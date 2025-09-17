@@ -1,0 +1,392 @@
+{
+  "ECE": {
+    "Sem1": [
+      {"code": "MAT101", "name": "LINEAR ALGEBRA AND CALCULUS", "credit": 4},
+      {"code": "PHT100 / CYT100", "name": "ENGINEERING PHYSICS A / ENGINEERING CHEMISTRY", "credit": 4},
+      {"code": "EST100 / EST110", "name": "ENGINEERING MECHANICS / ENGINEERING GRAPHICS", "credit": 3},
+      {"code": "EST130", "name": "BASICS OF ELECTRICAL AND ELECTRONICS ENGINEERING", "credit": 4},
+      {"code": "HUN101", "name": "LIFE SKILLS", "credit": 0},
+      {"code": "PHL120 / CYL120", "name": "ENGINEERING PHYSICS LAB / ENGINEERING CHEMISTRY LAB", "credit": 1},
+      {"code": "ESL130", "name": "ELECTRICAL AND ELECTRONICS WORKSHOP", "credit": 1}
+    ],
+    "Sem2": [
+      {"code": "MAT102", "name": "VECTOR CALCULUS, DIFFERENTIAL EQUATIONS AND TRANSFORMS", "credit": 4},
+      {"code": "PHT100 / CYT100", "name": "ENGINEERING PHYSICS A / ENGINEERING CHEMISTRY", "credit": 4},
+      {"code": "EST100 / EST110", "name": "ENGINEERING MECHANICS / ENGINEERING GRAPHICS", "credit": 3},
+      {"code": "EST120", "name": "BASICS OF CIVIL AND MECHANICAL ENGINEERING", "credit": 4},
+      {"code": "HUT102", "name": "PROFESSIONAL COMMUNICATION", "credit": 0},
+      {"code": "EST102", "name": "PROGRAMMING IN C", "credit": 4},
+      {"code": "PHL120 / CYL120", "name": "ENGINEERING PHYSICS LAB / ENGINEERING CHEMISTRY LAB", "credit": 1},
+      {"code": "ESL120", "name": "CIVIL AND MECHANICAL WORKSHOP", "credit": 1}
+    ],
+    "Sem3": [
+      {"code": "MAT201", "name": "PARTIAL DIFFERENTIAL EQUATION AND COMPLEX ANALYSIS", "credit": 4},
+      {"code": "ECT201", "name": "SOLID STATE DEVICES", "credit": 4},
+      {"code": "ECT203", "name": "LOGIC CIRCUIT DESIGN", "credit": 4},
+      {"code": "ECT205", "name": "NETWORK THEORY", "credit": 4},
+      {"code": "EST200 / HUT200", "name": "DESIGN AND ENGINEERING / PROFESSIONAL ETHICS", "credit": 2},
+      {"code": "MCN201", "name": "SUSTAINABLE ENGINEERING", "credit": 0},
+      {"code": "ECL201", "name": "SCIENTIFIC COMPUTING LAB", "credit": 2},
+      {"code": "ECL203", "name": "LOGIC DESIGN LAB", "credit": 2}
+    ],
+    "Sem4": [
+      {"code": "MAT204", "name": "PROBABILITY, RANDOM PROCESS AND NUMERICAL METHODS", "credit": 4},
+      {"code": "ECT202", "name": "ANALOG CIRCUITS", "credit": 4},
+      {"code": "ECT204", "name": "SIGNALS AND SYSTEMS", "credit": 4},
+      {"code": "ECT206", "name": "COMPUTER ARCHITECTURE AND MICROCONTROLLERS", "credit": 4},
+      {"code": "EST200 / HUT200", "name": "DESIGN AND ENGINEERING / PROFESSIONAL ETHICS", "credit": 2},
+      {"code": "MCN202", "name": "CONSTITUTION OF INDIA", "credit": 0},
+      {"code": "ECL202", "name": "ANALOG CIRCUITS AND SIMULATION LAB", "credit": 2},
+      {"code": "ECL204", "name": "MICROCONTROLLER LAB", "credit": 2}
+    ],
+    "Sem5": [
+      {"code": "ECT301", "name": "LINEAR INTEGRATED CIRCUITS", "credit": 4},
+      {"code": "ECT303", "name": "DIGITAL SIGNAL PROCESSING", "credit": 4},
+      {"code": "ECT305", "name": "ANALOG AND DIGITAL COMMUNICATION", "credit": 4},
+      {"code": "ECT307", "name": "CONTROL SYSTEMS", "credit": 4},
+      {"code": "HUT300 / HUT310", "name": "INDUSTRIAL ECONOMICS & FOREIGN TRADE / MANAGEMENT FOR ENGINEERS", "credit": 3},
+      {"code": "MCN301", "name": "DISASTER MANAGEMENT", "credit": 0},
+      {"code": "ECL331", "name": "ANALOG INTEGRATED CIRCUITS AND SIMULATION LAB", "credit": 2},
+      {"code": "ECL333", "name": "DIGITAL SIGNAL PROCESSING LAB", "credit": 2}
+    ],
+    "Sem6": [
+      {"code": "ECT302", "name": "ELECTROMAGNETICS", "credit": 4},
+      {"code": "ECT304", "name": "VLSI CIRCUIT DESIGN", "credit": 4},
+      {"code": "ECT306", "name": "INFORMATION THEORY AND CODING", "credit": 4},
+      {"code": "ECTXXX", "name": "PROGRAM ELECTIVE I", "credit": 3},
+      {"code": "HUT300 / HUT310", "name": "INDUSTRIAL ECONOMICS & FOREIGN TRADE / MANAGEMENT FOR ENGINEERS", "credit": 3},
+      {"code": "ECT308", "name": "COMPREHENSIVE COURSE WORK", "credit": 1},
+      {"code": "ECL332", "name": "COMMUNICATION LAB", "credit": 2},
+      {"code": "ECD334", "name": "MINIPROJECT", "credit": 2}
+    ],
+    "Sem7": [
+      {"code": "ECT401", "name": "WIRELESS COMMUNICATION", "credit": 3},
+      {"code": "ECTXXX", "name": "PROGRAM ELECTIVE II", "credit": 3},
+      {"code": "ECTXXX", "name": "OPEN ELECTIVE", "credit": 3},
+      {"code": "MCN401", "name": "INDUSTRIAL SAFETY ENGINEERING", "credit": 0},
+      {"code": "ECL411", "name": "ELECTROMAGNETICS LAB", "credit": 2},
+      {"code": "ECQ413", "name": "SEMINAR", "credit": 2},
+      {"code": "ECD415", "name": "PROJECT PHASE I", "credit": 2}
+    ],
+    "Sem8": [
+      {"code": "ECT402", "name": "INSTRUMENTATION", "credit": 3},
+      {"code": "ECTXXX", "name": "PROGRAM ELECTIVE III", "credit": 3},
+      {"code": "ECTXXX", "name": "PROGRAM ELECTIVE IV", "credit": 3},
+      {"code": "ECTXXX", "name": "PROGRAM ELECTIVE V", "credit": 3},
+      {"code": "ECT404", "name": "COMPREHENSIVE VIVA VOCE", "credit": 1},
+      {"code": "ECD416", "name": "PROJECT PHASE II", "credit": 4}
+    ]
+  },
+  "CSE": {
+    "Sem1": [
+      {"code": "MAT101", "name": "LINEAR ALGEBRA AND CALCULUS", "credit": 4},
+      {"code": "PHT100 / CYT100", "name": "ENGINEERING PHYSICS A / ENGINEERING CHEMISTRY", "credit": 4},
+      {"code": "EST100 / EST110", "name": "ENGINEERING MECHANICS / ENGINEERING GRAPHICS", "credit": 3},
+      {"code": "EST130", "name": "BASICS OF ELECTRICAL AND ELECTRONICS ENGINEERING", "credit": 4},
+      {"code": "HUN101", "name": "LIFE SKILLS", "credit": 0},
+      {"code": "PHL120 / CYL120", "name": "ENGINEERING PHYSICS LAB / ENGINEERING CHEMISTRY LAB", "credit": 1},
+      {"code": "ESL130", "name": "ELECTRICAL AND ELECTRONICS WORKSHOP", "credit": 1}
+    ],
+    "Sem2": [
+      {"code": "MAT102", "name": "VECTOR CALCULUS, DIFFERENTIAL EQUATIONS AND TRANSFORMS", "credit": 4},
+      {"code": "PHT100 / CYT100", "name": "ENGINEERING PHYSICS A / ENGINEERING CHEMISTRY", "credit": 4},
+      {"code": "EST100 / EST110", "name": "ENGINEERING MECHANICS / ENGINEERING GRAPHICS", "credit": 3},
+      {"code": "EST120", "name": "BASICS OF CIVIL AND MECHANICAL ENGINEERING", "credit": 4},
+      {"code": "HUT102", "name": "PROFESSIONAL COMMUNICATION", "credit": 0},
+      {"code": "EST102", "name": "PROGRAMMING IN C", "credit": 4},
+      {"code": "PHL120 / CYL120", "name": "ENGINEERING PHYSICS LAB / ENGINEERING CHEMISTRY LAB", "credit": 1},
+      {"code": "ESL120", "name": "CIVIL AND MECHANICAL WORKSHOP", "credit": 1}
+    ],
+    "Sem3": [
+      {"code": "MAT203", "name": "DISCRETE MATHEMATICAL STRUCTURES", "credit": 4},
+      {"code": "CST201", "name": "DATA STRUCTURES", "credit": 4},
+      {"code": "CST203", "name": "LOGIC SYSTEM DESIGN", "credit": 4},
+      {"code": "CST205", "name": "OBJECT ORIENTED PROGRAMMING USING JAVA", "credit": 4},
+      {"code": "EST200 / HUT200", "name": "DESIGN AND ENGINEERING / PROFESSIONAL ETHICS", "credit": 2},
+      {"code": "MCN201", "name": "SUSTAINABLE ENGINEERING", "credit": 0},
+      {"code": "CSL201", "name": "DATA STRUCTURES LAB", "credit": 2},
+      {"code": "CSL203", "name": "OBJECT ORIENTED PROGRAMMING LAB (IN JAVA)", "credit": 2}
+    ],
+    "Sem4": [
+      {"code": "MAT206", "name": "GRAPH THEORY", "credit": 4},
+      {"code": "CST202", "name": "COMPUTER ORGANIZATION AND ARCHITECTURE", "credit": 4},
+      {"code": "CST204", "name": "DATABASE MANAGEMENT SYSTEMS", "credit": 4},
+      {"code": "CST206", "name": "OPERATING SYSTEMS", "credit": 4},
+      {"code": "EST200 / HUT200", "name": "DESIGN AND ENGINEERING / PROFESSIONAL ETHICS", "credit": 2},
+      {"code": "MCN202", "name": "CONSTITUTION OF INDIA", "credit": 0},
+      {"code": "CSL202", "name": "DIGITAL LAB", "credit": 2},
+      {"code": "CSL204", "name": "OPERATING SYSTEMS LAB", "credit": 2}
+    ],
+    "Sem5": [
+      {"code": "CST301", "name": "FORMAL LANGUAGES AND AUTOMATA THEORY", "credit": 4},
+      {"code": "CST303", "name": "COMPUTER NETWORKS", "credit": 4},
+      {"code": "CST305", "name": "SYSTEM SOFTWARE", "credit": 4},
+      {"code": "CST307", "name": "MICROPROCESSORS AND MICROCONTROLLERS", "credit": 4},
+      {"code": "HUT300 / HUT310", "name": "INDUSTRIAL ECONOMICS & FOREIGN TRADE / MANAGEMENT FOR ENGINEERS", "credit": 3},
+      {"code": "MCN301", "name": "DISASTER MANAGEMENT", "credit": 0},
+      {"code": "CSL331", "name": "SYSTEM SOFTWARE AND MICROPROCESSORS LAB", "credit": 2},
+      {"code": "CSL333", "name": "DATABASE MANAGEMENT SYSTEMS LAB", "credit": 2}
+    ],
+    "Sem6": [
+      {"code": "CST302", "name": "COMPILER DESIGN", "credit": 4},
+      {"code": "CST304", "name": "ALGORITHM ANALYSIS AND DESIGN", "credit": 4},
+      {"code": "CST306", "name": "COMPUTER GRAPHICS AND IMAGE PROCESSING", "credit": 4},
+      {"code": "CSTXXX", "name": "PROGRAM ELECTIVE I", "credit": 3},
+      {"code": "HUT300 / HUT310", "name": "INDUSTRIAL ECONOMICS & FOREIGN TRADE / MANAGEMENT FOR ENGINEERS", "credit": 3},
+      {"code": "CST308", "name": "COMPREHENSIVE COURSE WORK", "credit": 1},
+      {"code": "CSL332", "name": "NETWORKING LAB", "credit": 2},
+      {"code": "CSD334", "name": "MINI PROJECT", "credit": 2}
+    ],
+    "Sem7": [
+      {"code": "CST401", "name": "ARTIFICIAL INTELLIGENCE AND DATA SCIENCE", "credit": 3},
+      {"code": "CSTXXX", "name": "PROGRAM ELECTIVE II", "credit": 3},
+      {"code": "CSTXXX", "name": "OPEN ELECTIVE", "credit": 3},
+      {"code": "MCN401", "name": "INDUSTRIAL SAFETY ENGINEERING", "credit": 0},
+      {"code": "CSL411", "name": "COMPILER DESIGN LAB", "credit": 2},
+      {"code": "CSQ413", "name": "SEMINAR", "credit": 2},
+      {"code": "CSD415", "name": "PROJECT PHASE I", "credit": 2}
+    ],
+    "Sem8": [
+      {"code": "CST402", "name": "DISTRIBUTED COMPUTING", "credit": 3},
+      {"code": "CSTXXX", "name": "PROGRAM ELECTIVE III", "credit": 3},
+      {"code": "CSTXXX", "name": "PROGRAM ELECTIVE IV", "credit": 3},
+      {"code": "CSTXXX", "name": "PROGRAM ELECTIVE V", "credit": 3},
+      {"code": "CST404", "name": "COMPREHENSIVE VIVA VOCE", "credit": 1},
+      {"code": "CSD416", "name": "PROJECT PHASE II", "credit": 4}
+    ]
+  },
+  "EEE": {
+    "Sem1": [
+      {"code": "MAT101", "name": "LINEAR ALGEBRA AND CALCULUS", "credit": 4},
+      {"code": "PHT100 / CYT100", "name": "ENGINEERING PHYSICS A / ENGINEERING CHEMISTRY", "credit": 4},
+      {"code": "EST100 / EST110", "name": "ENGINEERING MECHANICS / ENGINEERING GRAPHICS", "credit": 3},
+      {"code": "EST120", "name": "BASICS OF CIVIL AND MECHANICAL ENGINEERING", "credit": 4},
+      {"code": "HUN101", "name": "LIFE SKILLS", "credit": 0},
+      {"code": "PHL120 / CYL120", "name": "ENGINEERING PHYSICS LAB / ENGINEERING CHEMISTRY LAB", "credit": 1},
+      {"code": "ESL120", "name": "CIVIL AND MECHANICAL WORKSHOP", "credit": 1}
+    ],
+    "Sem2": [
+      {"code": "MAT102", "name": "VECTOR CALCULUS, DIFFERENTIAL EQUATIONS AND TRANSFORMS", "credit": 4},
+      {"code": "PHT100 / CYT100", "name": "ENGINEERING PHYSICS A / ENGINEERING CHEMISTRY", "credit": 4},
+      {"code": "EST100 / EST110", "name": "ENGINEERING MECHANICS / ENGINEERING GRAPHICS", "credit": 3},
+      {"code": "EST130", "name": "BASICS OF ELECTRICAL AND ELECTRONICS ENGINEERING", "credit": 4},
+      {"code": "HUT102", "name": "PROFESSIONAL COMMUNICATION", "credit": 0},
+      {"code": "EST102", "name": "PROGRAMMING IN C", "credit": 4},
+      {"code": "PHL120 / CYL120", "name": "ENGINEERING PHYSICS LAB / ENGINEERING CHEMISTRY LAB", "credit": 1},
+      {"code": "ESL130", "name": "ELECTRICAL AND ELECTRONICS WORKSHOP", "credit": 1}
+    ],
+    "Sem3": [
+      {"code": "MAT205", "name": "COMPLEX ANALYSIS AND PARTIAL DIFFERENTIAL EQUATIONS", "credit": 4},
+      {"code": "EET201", "name": "CIRCUITS AND NETWORKS", "credit": 4},
+      {"code": "EET203", "name": "MEASUREMENTS AND INSTRUMENTATION", "credit": 4},
+      {"code": "EET205", "name": "ANALOG ELECTRONICS", "credit": 4},
+      {"code": "EST200 / HUT200", "name": "DESIGN AND ENGINEERING / PROFESSIONAL ETHICS", "credit": 2},
+      {"code": "MCN201", "name": "SUSTAINABLE ENGINEERING", "credit": 0},
+      {"code": "EEL201", "name": "CIRCUITS AND MEASUREMENTS LAB", "credit": 2},
+      {"code": "EEL203", "name": "ANALOG ELECTRONICS LAB", "credit": 2}
+    ],
+    "Sem4": [
+      {"code": "MAT208", "name": "PROBABILITY, STATISTICS AND ADVANCED GRAPH THEORY", "credit": 4},
+      {"code": "EET202", "name": "DC MACHINES AND TRANSFORMERS", "credit": 4},
+      {"code": "EET204", "name": "ELECTROMAGNETIC THEORY", "credit": 4},
+      {"code": "EET206", "name": "DIGITAL ELECTRONICS", "credit": 4},
+      {"code": "EST200 / HUT200", "name": "DESIGN AND ENGINEERING / PROFESSIONAL ETHICS", "credit": 2},
+      {"code": "MCN202", "name": "CONSTITUTION OF INDIA", "credit": 0},
+      {"code": "EEL202", "name": "DC MACHINES AND TRANSFORMERS LAB", "credit": 2},
+      {"code": "EEL204", "name": "DIGITAL ELECTRONICS AND LOGIC DESIGN LAB", "credit": 2}
+    ],
+    "Sem5": [
+      {"code": "EET301", "name": "POWER SYSTEMS I", "credit": 4},
+      {"code": "EET303", "name": "MICROPROCESSORS AND MICROCONTROLLERS", "credit": 4},
+      {"code": "EET305", "name": "SIGNALS AND SYSTEMS", "credit": 4},
+      {"code": "EET307", "name": "SYNCHRONOUS AND INDUCTION MACHINES", "credit": 4},
+      {"code": "HUT300 / HUT310", "name": "INDUSTRIAL ECONOMICS & FOREIGN TRADE / MANAGEMENT FOR ENGINEERS", "credit": 3},
+      {"code": "MCN301", "name": "DISASTER MANAGEMENT", "credit": 0},
+      {"code": "EEL331", "name": "MICROPROCESSOR AND MICROCONTROLLER LAB", "credit": 2},
+      {"code": "EEL333", "name": "SYNCHRONOUS AND INDUCTION MACHINES LAB", "credit": 2}
+    ],
+    "Sem6": [
+      {"code": "EET302", "name": "LINEAR CONTROL SYSTEMS", "credit": 4},
+      {"code": "EET304", "name": "POWER ELECTRONICS", "credit": 4},
+      {"code": "EET306", "name": "POWER SYSTEMS II", "credit": 4},
+      {"code": "EETXXX", "name": "PROGRAM ELECTIVE I", "credit": 3},
+      {"code": "HUT300 / HUT310", "name": "INDUSTRIAL ECONOMICS & FOREIGN TRADE / MANAGEMENT FOR ENGINEERS", "credit": 3},
+      {"code": "EET308", "name": "COMPREHENSIVE COURSE WORK", "credit": 1},
+      {"code": "EEL332", "name": "POWER ELECTRONICS LAB", "credit": 2},
+      {"code": "EED334", "name": "MINI PROJECT", "credit": 2}
+    ],
+    "Sem7": [
+      {"code": "EET401", "name": "ADVANCED CONTROL THEORY", "credit": 3},
+      {"code": "EETXXX", "name": "PROGRAM ELECTIVE II", "credit": 3},
+      {"code": "EETXXX", "name": "OPEN ELECTIVE", "credit": 3},
+      {"code": "MCN401", "name": "INDUSTRIAL SAFETY ENGINEERING", "credit": 0},
+      {"code": "EEL411", "name": "POWER SYSTEM LAB", "credit": 2},
+      {"code": "EEQ413", "name": "SEMINAR", "credit": 2},
+      {"code": "EED415", "name": "PROJECT PHASE I", "credit": 2}
+    ],
+    "Sem8": [
+      {"code": "EET402", "name": "INSTRUMENTATION AND CONTROL", "credit": 3},
+      {"code": "EETXXX", "name": "PROGRAM ELECTIVE III", "credit": 3},
+      {"code": "EETXXX", "name": "PROGRAM ELECTIVE IV", "credit": 3},
+      {"code": "EETXXX", "name": "PROGRAM ELECTIVE V", "credit": 3},
+      {"code": "EET404", "name": "COMPREHENSIVE VIVA VOCE", "credit": 1},
+      {"code": "EED416", "name": "PROJECT PHASE II", "credit": 4}
+    ]
+  },
+  "ME": {
+    "Sem1": [
+      {"code": "MAT101", "name": "LINEAR ALGEBRA AND CALCULUS", "credit": 4},
+      {"code": "PHT100 / CYT100", "name": "ENGINEERING PHYSICS A / ENGINEERING CHEMISTRY", "credit": 4},
+      {"code": "EST110", "name": "ENGINEERING GRAPHICS", "credit": 3},
+      {"code": "EST130", "name": "BASICS OF ELECTRICAL AND ELECTRONICS ENGINEERING", "credit": 4},
+      {"code": "HUN101", "name": "LIFE SKILLS", "credit": 0},
+      {"code": "PHL120 / CYL120", "name": "ENGINEERING PHYSICS LAB / ENGINEERING CHEMISTRY LAB", "credit": 1},
+      {"code": "ESL130", "name": "ELECTRICAL AND ELECTRONICS WORKSHOP", "credit": 1}
+    ],
+    "Sem2": [
+      {"code": "MAT102", "name": "VECTOR CALCULUS, DIFFERENTIAL EQUATIONS AND TRANSFORMS", "credit": 4},
+      {"code": "PHT100 / CYT100", "name": "ENGINEERING PHYSICS A / ENGINEERING CHEMISTRY", "credit": 4},
+      {"code": "EST100", "name": "ENGINEERING MECHANICS", "credit": 3},
+      {"code": "EST120", "name": "BASICS OF CIVIL AND MECHANICAL ENGINEERING", "credit": 4},
+      {"code": "HUT102", "name": "PROFESSIONAL COMMUNICATION", "credit": 0},
+      {"code": "EST102", "name": "PROGRAMMING IN C", "credit": 4},
+      {"code": "PHL120 / CYL120", "name": "ENGINEERING PHYSICS LAB / ENGINEERING CHEMISTRY LAB", "credit": 1},
+      {"code": "ESL120", "name": "CIVIL AND MECHANICAL WORKSHOP", "credit": 1}
+    ],
+    "Sem3": [
+      {"code": "MAT201", "name": "PARTIAL DIFFERENTIAL EQUATIONS AND COMPLEX ANALYSIS", "credit": 4},
+      {"code": "MET201", "name": "MECHANICS OF SOLIDS", "credit": 4},
+      {"code": "MET203", "name": "MECHANICS OF FLUIDS", "credit": 4},
+      {"code": "MET205", "name": "METALLURGY AND MATERIALS ENGINEERING", "credit": 4},
+      {"code": "EST200 / HUT200", "name": "DESIGN AND ENGINEERING / PROFESSIONAL ETHICS", "credit": 2},
+      {"code": "MCN201", "name": "SUSTAINABLE ENGINEERING", "credit": 0},
+      {"code": "MEL201", "name": "COMPUTER AIDED MACHINE DRAWING LAB", "credit": 2},
+      {"code": "MEL203", "name": "MATERIAL TESTING LAB", "credit": 2}
+    ],
+    "Sem4": [
+      {"code": "MAT202", "name": "PROBABILITY, STATISTICS AND NUMERICAL METHODS", "credit": 4},
+      {"code": "MET202", "name": "ENGINEERING THERMODYNAMICS", "credit": 4},
+      {"code": "MET204", "name": "MANUFACTURING PROCESSES", "credit": 4},
+      {"code": "MET206", "name": "FLUID MACHINERY", "credit": 4},
+      {"code": "EST200 / HUT200", "name": "DESIGN AND ENGINEERING / PROFESSIONAL ETHICS", "credit": 2},
+      {"code": "MCN202", "name": "CONSTITUTION OF INDIA", "credit": 0},
+      {"code": "MEL202", "name": "FLUID MECHANICS AND MACHINES LAB", "credit": 2},
+      {"code": "MEL204", "name": "MANUFACTURING TECHNOLOGY LAB I", "credit": 2}
+    ],
+    "Sem5": [
+      {"code": "MET301", "name": "ADVANCED MECHANICS OF SOLIDS", "credit": 4},
+      {"code": "MET303", "name": "THERMAL ENGINEERING", "credit": 4},
+      {"code": "MET305", "name": "MACHINE TOOLS AND DIGITAL MANUFACTURING", "credit": 4},
+      {"code": "MET307", "name": "THEORY OF MACHINES", "credit": 4},
+      {"code": "HUT300 / HUT310", "name": "INDUSTRIAL ECONOMICS & FOREIGN TRADE / MANAGEMENT FOR ENGINEERS", "credit": 3},
+      {"code": "MCN301", "name": "DISASTER MANAGEMENT", "credit": 0},
+      {"code": "MEL331", "name": "MANUFACTURING TECHNOLOGY LAB II", "credit": 2},
+      {"code": "MEL333", "name": "THERMAL ENGINEERING LAB", "credit": 2}
+    ],
+    "Sem6": [
+      {"code": "MET302", "name": "HEAT AND MASS TRANSFER", "credit": 4},
+      {"code": "MET304", "name": "DYNAMICS OF MACHINERY", "credit": 4},
+      {"code": "MET306", "name": "DESIGN OF MACHINE ELEMENTS I", "credit": 4},
+      {"code": "METXXX", "name": "PROGRAM ELECTIVE I", "credit": 3},
+      {"code": "HUT300 / HUT310", "name": "INDUSTRIAL ECONOMICS & FOREIGN TRADE / MANAGEMENT FOR ENGINEERS", "credit": 3},
+      {"code": "MET308", "name": "COMPREHENSIVE COURSE WORK", "credit": 1},
+      {"code": "MEL332", "name": "HEAT TRANSFER LAB", "credit": 2},
+      {"code": "MED334", "name": "MINI PROJECT", "credit": 2}
+    ],
+    "Sem7": [
+      {"code": "MET401", "name": "DESIGN OF MACHINE ELEMENTS II", "credit": 3},
+      {"code": "METXXX", "name": "PROGRAM ELECTIVE II", "credit": 3},
+      {"code": "METXXX", "name": "OPEN ELECTIVE", "credit": 3},
+      {"code": "MCN401", "name": "INDUSTRIAL SAFETY ENGINEERING", "credit": 0},
+      {"code": "MEL411", "name": "CIM AND METROLOGY LAB", "credit": 2},
+      {"code": "MEQ413", "name": "SEMINAR", "credit": 2},
+      {"code": "MED415", "name": "PROJECT PHASE I", "credit": 2}
+    ],
+    "Sem8": [
+      {"code": "MET402", "name": "MECHATRONICS", "credit": 3},
+      {"code": "METXXX", "name": "PROGRAM ELECTIVE III", "credit": 3},
+      {"code": "METXXX", "name": "PROGRAM ELECTIVE IV", "credit": 3},
+      {"code": "METXXX", "name": "PROGRAM ELECTIVE V", "credit": 3},
+      {"code": "MET404", "name": "COMPREHENSIVE VIVA VOCE", "credit": 1},
+      {"code": "MED416", "name": "PROJECT PHASE II", "credit": 4}
+    ]
+  },
+  "CE": {
+    "Sem1": [
+      {"code": "MAT101", "name": "LINEAR ALGEBRA AND CALCULUS", "credit": 4},
+      {"code": "PHT100 / CYT100", "name": "ENGINEERING PHYSICS A / ENGINEERING CHEMISTRY", "credit": 4},
+      {"code": "EST100 / EST110", "name": "ENGINEERING MECHANICS / ENGINEERING GRAPHICS", "credit": 3},
+      {"code": "EST130", "name": "BASICS OF ELECTRICAL AND ELECTRONICS ENGINEERING", "credit": 4},
+      {"code": "HUN101", "name": "LIFE SKILLS", "credit": 0},
+      {"code": "PHL120 / CYL120", "name": "ENGINEERING PHYSICS LAB / ENGINEERING CHEMISTRY LAB", "credit": 1},
+      {"code": "ESL130", "name": "ELECTRICAL AND ELECTRONICS WORKSHOP", "credit": 1}
+    ],
+    "Sem2": [
+      {"code": "MAT102", "name": "VECTOR CALCULUS, DIFFERENTIAL EQUATIONS AND TRANSFORMS", "credit": 4},
+      {"code": "PHT100 / CYT100", "name": "ENGINEERING PHYSICS A / ENGINEERING CHEMISTRY", "credit": 4},
+      {"code": "EST100 / EST110", "name": "ENGINEERING MECHANICS / ENGINEERING GRAPHICS", "credit": 3},
+      {"code": "EST120", "name": "BASICS OF CIVIL AND MECHANICAL ENGINEERING", "credit": 4},
+      {"code": "HUT102", "name": "PROFESSIONAL COMMUNICATION", "credit": 0},
+      {"code": "EST102", "name": "PROGRAMMING IN C", "credit": 4},
+      {"code": "PHL120 / CYL120", "name": "ENGINEERING PHYSICS LAB / ENGINEERING CHEMISTRY LAB", "credit": 1},
+      {"code": "ESL120", "name": "CIVIL AND MECHANICAL WORKSHOP", "credit": 1}
+    ],
+    "Sem3": [
+      {"code": "MAT201", "name": "PARTIAL DIFFERENTIAL EQUATIONS AND COMPLEX ANALYSIS", "credit": 4},
+      {"code": "CET201", "name": "MECHANICS OF SOLIDS", "credit": 4},
+      {"code": "CET203", "name": "FLUID MECHANICS AND HYDRAULICS", "credit": 4},
+      {"code": "CET205", "name": "SURVEYING", "credit": 4},
+      {"code": "EST200 / HUT200", "name": "DESIGN AND ENGINEERING / PROFESSIONAL ETHICS", "credit": 2},
+      {"code": "MCN201", "name": "SUSTAINABLE ENGINEERING", "credit": 0},
+      {"code": "CEL201", "name": "CIVIL ENGINEERING DRAFTING LAB", "credit": 2},
+      {"code": "CEL203", "name": "SURVEYING LAB", "credit": 2}
+    ],
+    "Sem4": [
+      {"code": "MAT202", "name": "PROBABILITY, STATISTICS AND NUMERICAL METHODS", "credit": 4},
+      {"code": "CET202", "name": "STRUCTURAL ANALYSIS I", "credit": 4},
+      {"code": "CET204", "name": "GEOTECHNICAL ENGINEERING I", "credit": 4},
+      {"code": "CET206", "name": "CONSTRUCTION TECHNOLOGY", "credit": 4},
+      {"code": "EST200 / HUT200", "name": "DESIGN AND ENGINEERING / PROFESSIONAL ETHICS", "credit": 2},
+      {"code": "MCN202", "name": "CONSTITUTION OF INDIA", "credit": 0},
+      {"code": "CEL202", "name": "MATERIAL TESTING LAB I", "credit": 2},
+      {"code": "CEL204", "name": "GEOTECHNICAL ENGINEERING LAB I", "credit": 2}
+    ],
+    "Sem5": [
+      {"code": "CET301", "name": "STRUCTURAL ANALYSIS II", "credit": 4},
+      {"code": "CET303", "name": "GEOTECHNICAL ENGINEERING II", "credit": 4},
+      {"code": "CET305", "name": "DESIGN OF CONCRETE STRUCTURES I", "credit": 4},
+      {"code": "CET307", "name": "TRANSPORTATION ENGINEERING I", "credit": 4},
+      {"code": "HUT300 / HUT310", "name": "INDUSTRIAL ECONOMICS & FOREIGN TRADE / MANAGEMENT FOR ENGINEERS", "credit": 3},
+      {"code": "MCN301", "name": "DISASTER MANAGEMENT", "credit": 0},
+      {"code": "CEL331", "name": "MATERIAL TESTING LAB II", "credit": 2},
+      {"code": "CEL333", "name": "TRANSPORTATION ENGINEERING LAB", "credit": 2}
+    ],
+    "Sem6": [
+      {"code": "CET302", "name": "DESIGN OF HYDRAULIC STRUCTURES", "credit": 4},
+      {"code": "CET304", "name": "ENGINEERING HYDROLOGY", "credit": 4},
+      {"code": "CET306", "name": "DESIGN OF STEEL STRUCTURES", "credit": 4},
+      {"code": "CETXXX", "name": "PROGRAM ELECTIVE I", "credit": 3},
+      {"code": "HUT300 / HUT310", "name": "INDUSTRIAL ECONOMICS & FOREIGN TRADE / MANAGEMENT FOR ENGINEERS", "credit": 3},
+      {"code": "CET308", "name": "COMPREHENSIVE COURSE WORK", "credit": 1},
+      {"code": "CEL332", "name": "COMPUTATIONAL LAB", "credit": 2},
+      {"code": "CED334", "name": "MINI PROJECT", "credit": 2}
+    ],
+    "Sem7": [
+      {"code": "CET401", "name": "ENVIRONMENTAL ENGINEERING", "credit": 3},
+      {"code": "CETXXX", "name": "PROGRAM ELECTIVE II", "credit": 3},
+      {"code": "CETXXX", "name": "OPEN ELECTIVE", "credit": 3},
+      {"code": "MCN401", "name": "INDUSTRIAL SAFETY ENGINEERING", "credit": 0},
+      {"code": "CEL411", "name": "ENVIRONMENTAL ENGINEERING LAB", "credit": 2},
+      {"code": "CEQ413", "name": "SEMINAR", "credit": 2},
+      {"code": "CED415", "name": "PROJECT PHASE I", "credit": 2}
+    ],
+    "Sem8": [
+      {"code": "CET402", "name": "CONSTRUCTION MANAGEMENT", "credit": 3},
+      {"code": "CETXXX", "name": "PROGRAM ELECTIVE III", "credit": 3},
+      {"code": "CETXXX", "name": "PROGRAM ELECTIVE IV", "credit": 3},
+      {"code": "CETXXX", "name": "PROGRAM ELECTIVE V", "credit": 3},
+      {"code": "CET404", "name": "COMPREHENSIVE VIVA VOCE", "credit": 1},
+      {"code": "CED416", "name": "PROJECT PHASE II", "credit": 4}
+    ]
+  }
+}
