@@ -1,0 +1,413 @@
+{
+  "ECE": {
+    "Sem1": [
+      {"code": "GBMAT101", "name": "Group Specific Mathematics - 1", "credit": 3},
+      {"code": "GBPHT121/GBCYT122", "name": "Semiconductor Physics / Chemistry for Electronics Engineers", "credit": 4},
+      {"code": "GCEST103", "name": "Engineering Graphics and Computer-Aided Drawing", "credit": 3},
+      {"code": "GBEST104", "name": "Introduction to Electrical and Electronics Engineering", "credit": 4},
+      {"code": "UCEST105", "name": "Algorithmic Thinking with Python", "credit": 4},
+      {"code": "UCHUT128", "name": "Life Skills and Professional Communication", "credit": 1},
+      {"code": "GBPHL121/GBCYL122", "name": "Semiconductor Physics Lab / Chemistry for Electronics Engineers Lab", "credit": 1},
+      {"code": "GBESL106", "name": "Basic Electrical and Electronics Engineering Workshop", "credit": 1},
+      {"code": "UCPWT127", "name": "Health and Wellness", "credit": 1},
+      {"code": "UCSEM129", "name": "Skill Enhancement Course: Digital 101", "credit": 0}
+    ],
+    "Sem2": [
+      {"code": "GBMAT101", "name": "Group Specific Mathematics - 1", "credit": 3},
+      {"code": "GBPHT121/GBCYT122", "name": "Semiconductor Physics / Chemistry for Electronics Engineers", "credit": 4},
+      {"code": "GCEST103", "name": "Engineering Graphics and Computer-Aided Drawing", "credit": 3},
+      {"code": "GBEST104", "name": "Introduction to Electrical and Electronics Engineering", "credit": 4},
+      {"code": "UCEST105", "name": "Algorithmic Thinking with Python", "credit": 4},
+      {"code": "UCHUT128", "name": "Life Skills and Professional Communication", "credit": 1},
+      {"code": "GBPHL121/GBCYL122", "name": "Semiconductor Physics Lab / Chemistry for Electronics Engineers Lab", "credit": 1},
+      {"code": "GBESL106", "name": "Basic Electrical and Electronics Engineering Workshop", "credit": 1},
+      {"code": "UCPWT127", "name": "Health and Wellness", "credit": 1},
+      {"code": "UCSEM129", "name": "Skill Enhancement Course: Digital 101", "credit": 0}
+    ],
+    "Sem3": [
+      {"code": "GBMAT201", "name": "Group Specific Mathematics - 2", "credit": 3},
+      {"code": "ECT201", "name": "Solid State Devices", "credit": 4},
+      {"code": "ECT203", "name": "Logic Circuit Design", "credit": 4},
+      {"code": "ECT205", "name": "Network Theory", "credit": 4},
+      {"code": "UCHUT245/246", "name": "Humanities Elective 1", "credit": 2},
+      {"code": "UCMCN201", "name": "Constitution of India", "credit": 0},
+      {"code": "ECL201", "name": "Scientific Computing Lab", "credit": 2},
+      {"code": "ECL203", "name": "Logic Design Lab", "credit": 2}
+    ],
+    "Sem4": [
+      {"code": "GBMAT202", "name": "Mathematics for Electronics Engineering", "credit": 3},
+      {"code": "ECT202", "name": "Analog Circuits", "credit": 4},
+      {"code": "ECT204", "name": "Signals and Systems", "credit": 4},
+      {"code": "ECT206", "name": "Computer Architecture", "credit": 4},
+      {"code": "UCHUT245/246", "name": "Humanities Elective 2", "credit": 2},
+      {"code": "UCMCN202", "name": "Professional Ethics", "credit": 0},
+      {"code": "ECL202", "name": "Analog Circuits and Simulation Lab", "credit": 2},
+      {"code": "ECL204", "name": "Computer Architecture Lab", "credit": 2}
+    ],
+    "Sem5": [
+      {"code": "ECT301", "name": "Linear Integrated Circuits", "credit": 4},
+      {"code": "ECT303", "name": "Digital Signal Processing", "credit": 4},
+      {"code": "ECT305", "name": "Analog and Digital Communication", "credit": 4},
+      {"code": "ECT307", "name": "Control Systems", "credit": 4},
+      {"code": "ECT31N", "name": "Program Elective 1", "credit": 3},
+      {"code": "UCMCN301", "name": "Sustainable Engineering and Disaster Management", "credit": 0},
+      {"code": "ECL331", "name": "Linear Integrated Circuits and Simulation Lab", "credit": 2},
+      {"code": "ECL333", "name": "Digital Signal Processing Lab", "credit": 2}
+    ],
+    "Sem6": [
+      {"code": "ECT302", "name": "Electromagnetics", "credit": 4},
+      {"code": "ECT304", "name": "VLSI Design", "credit": 4},
+      {"code": "ECT306", "name": "Communication Systems", "credit": 4},
+      {"code": "ECT32N", "name": "Program Elective 2", "credit": 3},
+      {"code": "UCHUT346/347", "name": "Humanities Elective 3", "credit": 2},
+      {"code": "ECD334", "name": "Mini Project", "credit": 2},
+      {"code": "ECL332", "name": "Communication Engineering Lab", "credit": 2},
+      {"code": "ECD356", "name": "Internship 1", "credit": 0}
+    ],
+    "Sem7": [
+      {"code": "ECT401", "name": "Microwave and Antenna Theory", "credit": 4},
+      {"code": "ECT43N", "name": "Program Elective 3", "credit": 3},
+      {"code": "OET44N", "name": "Open Elective", "credit": 3},
+      {"code": "UCHUT448/449", "name": "Humanities Elective 4", "credit": 2},
+      {"code": "ECQ413", "name": "Seminar", "credit": 2},
+      {"code": "ECD415", "name": "Project Phase 1", "credit": 2},
+      {"code": "ECL411", "name": "Advanced Communication Lab", "credit": 2}
+    ],
+    "Sem8": [
+      {"code": "ECT45N", "name": "Program Elective 4", "credit": 3},
+      {"code": "ECT46N", "name": "Program Elective 5", "credit": 3},
+      {"code": "ECD416", "name": "Project Phase 2", "credit": 4},
+      {"code": "ECD458", "name": "Internship 2", "credit": 0},
+      {"code": "ECT402", "name": "Comprehensive Viva-Voce", "credit": 2}
+    ]
+  },
+  "CSE": {
+    "Sem1": [
+      {"code": "GCMAT101", "name": "Group Specific Mathematics - 1", "credit": 3},
+      {"code": "GCPHT121/GCCYT122", "name": "Physics for Computing / Chemistry for Computing", "credit": 4},
+      {"code": "GCEST103", "name": "Engineering Graphics and Computer-Aided Drawing", "credit": 3},
+      {"code": "GCEST104", "name": "Introduction to Electrical, Electronics and Communication Engineering", "credit": 4},
+      {"code": "UCEST105", "name": "Algorithmic Thinking with Python", "credit": 4},
+      {"code": "UCHUT128", "name": "Life Skills and Professional Communication", "credit": 1},
+      {"code": "GCPHL121/GCCYL122", "name": "Physics for Computing Lab / Chemistry for Computing Lab", "credit": 1},
+      {"code": "GCESL106", "name": "Basic Electrical, Electronics and Communication Engineering Workshop", "credit": 1},
+      {"code": "UCPWT127", "name": "Health and Wellness", "credit": 1},
+      {"code": "UCSEM129", "name": "Skill Enhancement Course: Digital 101", "credit": 0}
+    ],
+    "Sem2": [
+      {"code": "GCMAT101", "name": "Group Specific Mathematics - 1", "credit": 3},
+      {"code": "GCPHT121/GCCYT122", "name": "Physics for Computing / Chemistry for Computing", "credit": 4},
+      {"code": "GCEST103", "name": "Engineering Graphics and Computer-Aided Drawing", "credit": 3},
+      {"code": "GCEST104", "name": "Introduction to Electrical, Electronics and Communication Engineering", "credit": 4},
+      {"code": "UCEST105", "name": "Algorithmic Thinking with Python", "credit": 4},
+      {"code": "UCHUT128", "name": "Life Skills and Professional Communication", "credit": 1},
+      {"code": "GCPHL121/GCCYL122", "name": "Physics for Computing Lab / Chemistry for Computing Lab", "credit": 1},
+      {"code": "GCESL106", "name": "Basic Electrical, Electronics and Communication Engineering Workshop", "credit": 1},
+      {"code": "UCPWT127", "name": "Health and Wellness", "credit": 1},
+      {"code": "UCSEM129", "name": "Skill Enhancement Course: Digital 101", "credit": 0}
+    ],
+    "Sem3": [
+      {"code": "GCMAT201", "name": "Group Specific Mathematics - 2", "credit": 3},
+      {"code": "CST201", "name": "Data Structures", "credit": 4},
+      {"code": "CST203", "name": "Logic System Design", "credit": 4},
+      {"code": "CST205", "name": "Object Oriented Programming", "credit": 4},
+      {"code": "UCHUT245/246", "name": "Humanities Elective 1", "credit": 2},
+      {"code": "UCMCN201", "name": "Constitution of India", "credit": 0},
+      {"code": "CSL201", "name": "Data Structures Lab", "credit": 2},
+      {"code": "CSL203", "name": "Object Oriented Programming Lab", "credit": 2}
+    ],
+    "Sem4": [
+      {"code": "GCMAT202", "name": "Mathematics for Computer Science", "credit": 3},
+      {"code": "CST202", "name": "Computer Organization and Architecture", "credit": 4},
+      {"code": "CST204", "name": "Database Management Systems", "credit": 4},
+      {"code": "CST206", "name": "Operating Systems", "credit": 4},
+      {"code": "UCHUT245/246", "name": "Humanities Elective 2", "credit": 2},
+      {"code": "UCMCN202", "name": "Professional Ethics", "credit": 0},
+      {"code": "CSL202", "name": "Operating Systems Lab", "credit": 2},
+      {"code": "CSL204", "name": "Database Management Systems Lab", "credit": 2}
+    ],
+    "Sem5": [
+      {"code": "CST301", "name": "Formal Languages and Automata Theory", "credit": 4},
+      {"code": "CST303", "name": "Computer Networks", "credit": 4},
+      {"code": "CST305", "name": "System Software", "credit": 4},
+      {"code": "CST307", "name": "Design and Analysis of Algorithms", "credit": 4},
+      {"code": "CST31N", "name": "Program Elective 1", "credit": 3},
+      {"code": "UCMCN301", "name": "Sustainable Engineering and Disaster Management", "credit": 0},
+      {"code": "CSL331", "name": "System Software and Hardware Lab", "credit": 2},
+      {"code": "CSL333", "name": "Computer Networks Lab", "credit": 2}
+    ],
+    "Sem6": [
+      {"code": "CST302", "name": "Compiler Design", "credit": 4},
+      {"code": "CST304", "name": "Artificial Intelligence", "credit": 4},
+      {"code": "CST306", "name": "Comprehensive Course Work", "credit": 1},
+      {"code": "CST32N", "name": "Program Elective 2", "credit": 3},
+      {"code": "UCHUT346/347", "name": "Humanities Elective 3", "credit": 2},
+      {"code": "CSD334", "name": "Mini Project", "credit": 2},
+      {"code": "CSL332", "name": "Compiler Design Lab", "credit": 2},
+      {"code": "CSL334", "name": "Artificial Intelligence Lab", "credit": 2},
+      {"code": "CSD356", "name": "Internship 1", "credit": 0}
+    ],
+    "Sem7": [
+      {"code": "CST401", "name": "Cryptography and Network Security", "credit": 4},
+      {"code": "CST43N", "name": "Program Elective 3", "credit": 3},
+      {"code": "OET44N", "name": "Open Elective", "credit": 3},
+      {"code": "UCHUT448/449", "name": "Humanities Elective 4", "credit": 2},
+      {"code": "CSQ413", "name": "Seminar", "credit": 2},
+      {"code": "CSD415", "name": "Project Phase 1", "credit": 2},
+      {"code": "CSL411", "name": "Computer Graphics and Image Processing Lab", "credit": 2}
+    ],
+    "Sem8": [
+      {"code": "CST45N", "name": "Program Elective 4", "credit": 3},
+      {"code": "CST46N", "name": "Program Elective 5", "credit": 3},
+      {"code": "CSD416", "name": "Project Phase 2", "credit": 4},
+      {"code": "CSD458", "name": "Internship 2", "credit": 0},
+      {"code": "CST402", "name": "Comprehensive Viva-Voce", "credit": 2}
+    ]
+  },
+  "EEE": {
+    "Sem1": [
+      {"code": "GAMAT101", "name": "Group Specific Mathematics - 1", "credit": 3},
+      {"code": "GACYT121/GAPHT122", "name": "Chemistry for Mechanical Engineers / Engineering Physics", "credit": 4},
+      {"code": "GAEST103", "name": "Engineering Graphics and Computer-Aided Drawing", "credit": 3},
+      {"code": "GAEST104", "name": "Introduction to Civil and Mechanical Engineering", "credit": 4},
+      {"code": "UCEST105", "name": "Algorithmic Thinking with Python", "credit": 4},
+      {"code": "UCHUT128", "name": "Life Skills and Professional Communication", "credit": 1},
+      {"code": "GACYL121/GAPHL122", "name": "Chemistry Lab / Engineering Physics Lab", "credit": 1},
+      {"code": "GAESL106", "name": "Basic Civil and Mechanical Engineering Workshop", "credit": 1},
+      {"code": "UCPWT127", "name": "Health and Wellness", "credit": 1},
+      {"code": "UCSEM129", "name": "Skill Enhancement Course: Digital 101", "credit": 0}
+    ],
+    "Sem2": [
+      {"code": "GAMAT101", "name": "Group Specific Mathematics - 1", "credit": 3},
+      {"code": "GACYT121/GAPHT122", "name": "Chemistry for Mechanical Engineers / Engineering Physics", "credit": 4},
+      {"code": "GAEST103", "name": "Engineering Graphics and Computer-Aided Drawing", "credit": 3},
+      {"code": "GAEST104", "name": "Introduction to Civil and Mechanical Engineering", "credit": 4},
+      {"code": "UCEST105", "name": "Algorithmic Thinking with Python", "credit": 4},
+      {"code": "UCHUT128", "name": "Life Skills and Professional Communication", "credit": 1},
+      {"code": "GACYL121/GAPHL122", "name": "Chemistry Lab / Engineering Physics Lab", "credit": 1},
+      {"code": "GAESL106", "name": "Basic Civil and Mechanical Engineering Workshop", "credit": 1},
+      {"code": "UCPWT127", "name": "Health and Wellness", "credit": 1},
+      {"code": "UCSEM129", "name": "Skill Enhancement Course: Digital 101", "credit": 0}
+    ],
+    "Sem3": [
+      {"code": "GAMAT201", "name": "Group Specific Mathematics - 2", "credit": 3},
+      {"code": "EET201", "name": "Circuits and Networks", "credit": 4},
+      {"code": "EET203", "name": "Measurements and Instrumentation", "credit": 4},
+      {"code": "EET205", "name": "Analog Electronics", "credit": 4},
+      {"code": "UCHUT245/246", "name": "Humanities Elective 1", "credit": 2},
+      {"code": "UCMCN201", "name": "Constitution of India", "credit": 0},
+      {"code": "EEL201", "name": "Circuits and Measurements Lab", "credit": 2},
+      {"code": "EEL203", "name": "Analog Electronics Lab", "credit": 2}
+    ],
+    "Sem4": [
+      {"code": "GAMAT202", "name": "Mathematics for Electrical Engineering", "credit": 3},
+      {"code": "EET202", "name": "DC Machines and Transformers", "credit": 4},
+      {"code": "EET204", "name": "Electromagnetic Theory", "credit": 4},
+      {"code": "EET206", "name": "Digital Electronics", "credit": 4},
+      {"code": "UCHUT245/246", "name": "Humanities Elective 2", "credit": 2},
+      {"code": "UCMCN202", "name": "Professional Ethics", "credit": 0},
+      {"code": "EEL202", "name": "DC Machines and Transformers Lab", "credit": 2},
+      {"code": "EEL204", "name": "Digital Electronics and Logic Design Lab", "credit": 2}
+    ],
+    "Sem5": [
+      {"code": "EET301", "name": "Power Systems I", "credit": 4},
+      {"code": "EET303", "name": "Microprocessors and Microcontrollers", "credit": 4},
+      {"code": "EET305", "name": "Signals and Systems", "credit": 4},
+      {"code": "EET307", "name": "Synchronous and Induction Machines", "credit": 4},
+      {"code": "EET31N", "name": "Program Elective 1", "credit": 3},
+      {"code": "UCMCN301", "name": "Sustainable Engineering and Disaster Management", "credit": 0},
+      {"code": "EEL331", "name": "Microprocessor and Microcontroller Lab", "credit": 2},
+      {"code": "EEL333", "name": "Synchronous and Induction Machines Lab", "credit": 2}
+    ],
+    "Sem6": [
+      {"code": "EET302", "name": "Linear Control Systems", "credit": 4},
+      {"code": "EET304", "name": "Power Electronics", "credit": 4},
+      {"code": "EET306", "name": "Power Systems II", "credit": 4},
+      {"code": "EET32N", "name": "Program Elective 2", "credit": 3},
+      {"code": "UCHUT346/347", "name": "Humanities Elective 3", "credit": 2},
+      {"code": "EED334", "name": "Mini Project", "credit": 2},
+      {"code": "EEL332", "name": "Power Electronics Lab", "credit": 2},
+      {"code": "EED356", "name": "Internship 1", "credit": 0}
+    ],
+    "Sem7": [
+      {"code": "EET401", "name": "Advanced Control Theory", "credit": 4},
+      {"code": "EET43N", "name": "Program Elective 3", "credit": 3},
+      {"code": "OET44N", "name": "Open Elective", "credit": 3},
+      {"code": "UCHUT448/449", "name": "Humanities Elective 4", "credit": 2},
+      {"code": "EEQ413", "name": "Seminar", "credit": 2},
+      {"code": "EED415", "name": "Project Phase 1", "credit": 2},
+      {"code": "EEL411", "name": "Power System Lab", "credit": 2}
+    ],
+    "Sem8": [
+      {"code": "EET45N", "name": "Program Elective 4", "credit": 3},
+      {"code": "EET46N", "name": "Program Elective 5", "credit": 3},
+      {"code": "EED416", "name": "Project Phase 2", "credit": 4},
+      {"code": "EED458", "name": "Internship 2", "credit": 0},
+      {"code": "EET402", "name": "Comprehensive Viva-Voce", "credit": 2}
+    ]
+  },
+  "ME": {
+    "Sem1": [
+      {"code": "GAMAT101", "name": "Group Specific Mathematics - 1", "credit": 3},
+      {"code": "GACYT121/GAPHT122", "name": "Chemistry for Mechanical Engineers / Engineering Physics", "credit": 4},
+      {"code": "GAEST103", "name": "Engineering Graphics and Computer-Aided Drawing", "credit": 3},
+      {"code": "GAEST104", "name": "Introduction to Civil and Mechanical Engineering", "credit": 4},
+      {"code": "UCEST105", "name": "Algorithmic Thinking with Python", "credit": 4},
+      {"code": "UCHUT128", "name": "Life Skills and Professional Communication", "credit": 1},
+      {"code": "GACYL121/GAPHL122", "name": "Chemistry Lab / Engineering Physics Lab", "credit": 1},
+      {"code": "GAESL106", "name": "Basic Civil and Mechanical Engineering Workshop", "credit": 1},
+      {"code": "UCPWT127", "name": "Health and Wellness", "credit": 1},
+      {"code": "UCSEM129", "name": "Skill Enhancement Course: Digital 101", "credit": 0}
+    ],
+    "Sem2": [
+      {"code": "GAMAT101", "name": "Group Specific Mathematics - 1", "credit": 3},
+      {"code": "GACYT121/GAPHT122", "name": "Chemistry for Mechanical Engineers / Engineering Physics", "credit": 4},
+      {"code": "GAEST103", "name": "Engineering Graphics and Computer-Aided Drawing", "credit": 3},
+      {"code": "GAEST104", "name": "Introduction to Civil and Mechanical Engineering", "credit": 4},
+      {"code": "UCEST105", "name": "Algorithmic Thinking with Python", "credit": 4},
+      {"code": "UCHUT128", "name": "Life Skills and Professional Communication", "credit": 1},
+      {"code": "GACYL121/GAPHL122", "name": "Chemistry Lab / Engineering Physics Lab", "credit": 1},
+      {"code": "GAESL106", "name": "Basic Civil and Mechanical Engineering Workshop", "credit": 1},
+      {"code": "UCPWT127", "name": "Health and Wellness", "credit": 1},
+      {"code": "UCSEM129", "name": "Skill Enhancement Course: Digital 101", "credit": 0}
+    ],
+    "Sem3": [
+      {"code": "GAMAT201", "name": "Group Specific Mathematics - 2", "credit": 3},
+      {"code": "MET201", "name": "Mechanics of Solids", "credit": 4},
+      {"code": "MET203", "name": "Fluid Mechanics", "credit": 4},
+      {"code": "MET205", "name": "Thermodynamics", "credit": 4},
+      {"code": "UCHUT245/246", "name": "Humanities Elective 1", "credit": 2},
+      {"code": "UCMCN201", "name": "Constitution of India", "credit": 0},
+      {"code": "MEL201", "name": "Computer Aided Machine Drawing Lab", "credit": 2},
+      {"code": "MEL203", "name": "Fluid Mechanics Lab", "credit": 2}
+    ],
+    "Sem4": [
+      {"code": "GAMAT202", "name": "Mathematics for Mechanical Engineering", "credit": 3},
+      {"code": "MET202", "name": "Fluid Machinery", "credit": 4},
+      {"code": "MET204", "name": "Theory of Machines", "credit": 4},
+      {"code": "MET206", "name": "Manufacturing Processes", "credit": 4},
+      {"code": "UCHUT245/246", "name": "Humanities Elective 2", "credit": 2},
+      {"code": "UCMCN202", "name": "Professional Ethics", "credit": 0},
+      {"code": "MEL202", "name": "Manufacturing Technology Lab I", "credit": 2},
+      {"code": "MEL204", "name": "Fluid Machinery Lab", "credit": 2}
+    ],
+    "Sem5": [
+      {"code": "MET301", "name": "Design of Machine Elements", "credit": 4},
+      {"code": "MET303", "name": "Heat and Mass Transfer", "credit": 4},
+      {"code": "MET305", "name": "Computer Aided Design and Analysis", "credit": 4},
+      {"code": "MET307", "name": "Metrology and Instrumentation", "credit": 4},
+      {"code": "MET31N", "name": "Program Elective 1", "credit": 3},
+      {"code": "UCMCN301", "name": "Sustainable Engineering and Disaster Management", "credit": 0},
+      {"code": "MEL331", "name": "Manufacturing Technology Lab II", "credit": 2},
+      {"code": "MEL333", "name": "Heat Transfer Lab", "credit": 2}
+    ],
+    "Sem6": [
+      {"code": "MET302", "name": "Dynamics of Machinery", "credit": 4},
+      {"code": "MET304", "name": "Thermal Engineering", "credit": 4},
+      {"code": "MET306", "name": "Advanced Manufacturing Technology", "credit": 4},
+      {"code": "MET32N", "name": "Program Elective 2", "credit": 3},
+      {"code": "UCHUT346/347", "name": "Humanities Elective 3", "credit": 2},
+      {"code": "MED334", "name": "Mini Project", "credit": 2},
+      {"code": "MEL332", "name": "Thermal Engineering Lab", "credit": 2},
+      {"code": "MED356", "name": "Internship 1", "credit": 0}
+    ],
+    "Sem7": [
+      {"code": "MET401", "name": "Design of Transmission Elements", "credit": 4},
+      {"code": "MET43N", "name": "Program Elective 3", "credit": 3},
+      {"code": "OET44N", "name": "Open Elective", "credit": 3},
+      {"code": "UCHUT448/449", "name": "Humanities Elective 4", "credit": 2},
+      {"code": "MEQ413", "name": "Seminar", "credit": 2},
+      {"code": "MED415", "name": "Project Phase 1", "credit": 2},
+      {"code": "MEL411", "name": "Mechanical Engineering Lab", "credit": 2}
+    ],
+    "Sem8": [
+      {"code": "MET45N", "name": "Program Elective 4", "credit": 3},
+      {"code": "MET46N", "name": "Program Elective 5", "credit": 3},
+      {"code": "MED416", "name": "Project Phase 2", "credit": 4},
+      {"code": "MED458", "name": "Internship 2", "credit": 0},
+      {"code": "MET402", "name": "Comprehensive Viva-Voce", "credit": 2}
+    ]
+  },
+  "CE": {
+    "Sem1": [
+      {"code": "GAMAT101", "name": "Group Specific Mathematics - 1", "credit": 3},
+      {"code": "GACYT121/GAPHT122", "name": "Chemistry for Mechanical Engineers / Engineering Physics", "credit": 4},
+      {"code": "GAEST103", "name": "Engineering Graphics and Computer-Aided Drawing", "credit": 3},
+      {"code": "GAEST104", "name": "Introduction to Civil and Mechanical Engineering", "credit": 4},
+      {"code": "UCEST105", "name": "Algorithmic Thinking with Python", "credit": 4},
+      {"code": "UCHUT128", "name": "Life Skills and Professional Communication", "credit": 1},
+      {"code": "GACYL121/GAPHL122", "name": "Chemistry Lab / Engineering Physics Lab", "credit": 1},
+      {"code": "GAESL106", "name": "Basic Civil and Mechanical Engineering Workshop", "credit": 1},
+      {"code": "UCPWT127", "name": "Health and Wellness", "credit": 1},
+      {"code": "UCSEM129", "name": "Skill Enhancement Course: Digital 101", "credit": 0}
+    ],
+    "Sem2": [
+      {"code": "GAMAT101", "name": "Group Specific Mathematics - 1", "credit": 3},
+      {"code": "GACYT121/GAPHT122", "name": "Chemistry for Mechanical Engineers / Engineering Physics", "credit": 4},
+      {"code": "GAEST103", "name": "Engineering Graphics and Computer-Aided Drawing", "credit": 3},
+      {"code": "GAEST104", "name": "Introduction to Civil and Mechanical Engineering", "credit": 4},
+      {"code": "UCEST105", "name": "Algorithmic Thinking with Python", "credit": 4},
+      {"code": "UCHUT128", "name": "Life Skills and Professional Communication", "credit": 1},
+      {"code": "GACYL121/GAPHL122", "name": "Chemistry Lab / Engineering Physics Lab", "credit": 1},
+      {"code": "GAESL106", "name": "Basic Civil and Mechanical Engineering Workshop", "credit": 1},
+      {"code": "UCPWT127", "name": "Health and Wellness", "credit": 1},
+      {"code": "UCSEM129", "name": "Skill Enhancement Course: Digital 101", "credit": 0}
+    ],
+    "Sem3": [
+      {"code": "GAMAT201", "name": "Group Specific Mathematics - 2", "credit": 3},
+      {"code": "CET201", "name": "Mechanics of Solids", "credit": 4},
+      {"code": "CET203", "name": "Fluid Mechanics and Hydraulics", "credit": 4},
+      {"code": "CET205", "name": "Surveying", "credit": 4},
+      {"code": "UCHUT245/246", "name": "Humanities Elective 1", "credit": 2},
+      {"code": "UCMCN201", "name": "Constitution of India", "credit": 0},
+      {"code": "CEL201", "name": "Civil Engineering Drafting Lab", "credit": 2},
+      {"code": "CEL203", "name": "Surveying Lab", "credit": 2}
+    ],
+    "Sem4": [
+      {"code": "GAMAT202", "name": "Mathematics for Civil Engineering", "credit": 3},
+      {"code": "CET202", "name": "Structural Analysis I", "credit": 4},
+      {"code": "CET204", "name": "Geotechnical Engineering I", "credit": 4},
+      {"code": "CET206", "name": "Construction Technology", "credit": 4},
+      {"code": "UCHUT245/246", "name": "Humanities Elective 2", "credit": 2},
+      {"code": "UCMCN202", "name": "Professional Ethics", "credit": 0},
+      {"code": "CEL202", "name": "Material Testing Lab I", "credit": 2},
+      {"code": "CEL204", "name": "Geotechnical Engineering Lab I", "credit": 2}
+    ],
+    "Sem5": [
+      {"code": "CET301", "name": "Structural Analysis II", "credit": 4},
+      {"code": "CET303", "name": "Geotechnical Engineering II", "credit": 4},
+      {"code": "CET305", "name": "Design of Concrete Structures I", "credit": 4},
+      {"code": "CET307", "name": "Transportation Engineering", "credit": 4},
+      {"code": "CET31N", "name": "Program Elective 1", "credit": 3},
+      {"code": "UCMCN301", "name": "Sustainable Engineering and Disaster Management", "credit": 0},
+      {"code": "CEL331", "name": "Material Testing Lab II", "credit": 2},
+      {"code": "CEL333", "name": "Transportation Engineering Lab", "credit": 2}
+    ],
+    "Sem6": [
+      {"code": "CET302", "name": "Design of Hydraulic Structures", "credit": 4},
+      {"code": "CET304", "name": "Engineering Hydrology", "credit": 4},
+      {"code": "CET306", "name": "Design of Steel Structures", "credit": 4},
+      {"code": "CET32N", "name": "Program Elective 2", "credit": 3},
+      {"code": "UCHUT346/347", "name": "Humanities Elective 3", "credit": 2},
+      {"code": "CED334", "name": "Mini Project", "credit": 2},
+      {"code": "CEL332", "name": "Computational Lab", "credit": 2},
+      {"code": "CED356", "name": "Internship 1", "credit": 0}
+    ],
+    "Sem7": [
+      {"code": "CET401", "name": "Environmental Engineering", "credit": 4},
+      {"code": "CET43N", "name": "Program Elective 3", "credit": 3},
+      {"code": "OET44N", "name": "Open Elective", "credit": 3},
+      {"code": "UCHUT448/449", "name": "Humanities Elective 4", "credit": 2},
+      {"code": "CEQ413", "name": "Seminar", "credit": 2},
+      {"code": "CED415", "name": "Project Phase 1", "credit": 2},
+      {"code": "CEL411", "name": "Environmental Engineering Lab", "credit": 2}
+    ],
+    "Sem8": [
+      {"code": "CET45N", "name": "Program Elective 4", "credit": 3},
+      {"code": "CET46N", "name": "Program Elective 5", "credit": 3},
+      {"code": "CED416", "name": "Project Phase 2", "credit": 4},
+      {"code": "CED458", "name": "Internship 2", "credit": 0},
+      {"code": "CET402", "name": "Comprehensive Viva-Voce", "credit": 2}
+    ]
+  }
+}
