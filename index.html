@@ -11,6 +11,8 @@
   h2 { color:#004080; }
   .btn { margin:10px 5px; padding:10px 20px; font-size:16px; background:#004080; color:white; border:none; border-radius:6px; cursor:pointer; }
   .btn:hover { background:#003060; }
+  .btn-danger { background: #d9534f; }
+  .btn-danger:hover { background: #c9302c; }
   .btn:disabled { background:#ccc; cursor:not-allowed; }
   .input-group { margin:10px 0; }
   select, input { width:100%; padding:10px; font-size:16px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box; }
@@ -64,6 +66,7 @@
   <div id="cgpaControls" style="display:none;">
     <button class="btn" id="calcBtn" onclick="calcCGPA()">Calculate Overall CGPA</button>
     <button class="btn" id="shareBtn" onclick="shareResult()">Share Result</button>
+    <button class="btn btn-danger" id="clearBtn" onclick="clearGrades()">Clear All Grades</button>
     <div class="result" id="cgpaResult"></div>
     <div id="shareMsg" style="margin-top:5px;color:green;font-weight:bold;"></div>
   </div>
@@ -97,66 +100,80 @@
 </div>
 
 <script>
-// ===== Correct KTU Grading Map =====
 const gradeMap = { 
-  'S':10, 'A+':9.0, 'A':8.5, 
-  'B+':8.0, 'B':7.5, 'C+':7.0, 
-  'C':6.5, 'D':6.0, 'P':5.5, 
-  'F':0.0, 'FE':0.0, 'I':0.0 
+  'S':10, 'A+':9.0, 'A':8.5, 'B+':8.0, 'B':7.5, 'C+':7.0, 
+  'C':6.5, 'D':6.0, 'P':5.5, 'F':0.0, 'FE':0.0, 'I':0.0 
 };
-
 let syllabusData = {};
 let currentResults = {};
 
-function showCGPA(){
-  document.getElementById('homeScreen').style.display='none';
-  document.getElementById('cgpaScreen').style.display='block';
-}
-function showAttendance(){
-  document.getElementById('homeScreen').style.display='none';
-  document.getElementById('attendanceScreen').style.display='block';
-}
-function goHome(){
-  document.getElementById('cgpaScreen').style.display='none';
-  document.getElementById('attendanceScreen').style.display='none';
-  document.getElementById('homeScreen').style.display='block';
+// ===== NEW: HISTORY AND PAGE STATE MANAGEMENT =====
+
+// This function controls which "page" is visible
+function handleState(page) {
+    document.getElementById('homeScreen').style.display = 'none';
+    document.getElementById('cgpaScreen').style.display = 'none';
+    document.getElementById('attendanceScreen').style.display = 'none';
+
+    if (page === 'cgpa') {
+        document.getElementById('cgpaScreen').style.display = 'block';
+    } else if (page === 'attendance') {
+        document.getElementById('attendanceScreen').style.display = 'block';
+    } else { // Default to home
+        document.getElementById('homeScreen').style.display = 'block';
+    }
 }
 
-// ===== UPDATED loadSemesters FUNCTION to handle different schemes =====
+// This listens for the browser's back/forward button clicks
+window.onpopstate = function(event) {
+    if (event.state && event.state.page) {
+        handleState(event.state.page);
+    } else {
+        handleState('home');
+    }
+};
+
+// Initial page load handling
+document.addEventListener('DOMContentLoaded', () => {
+    let initialPage = window.location.hash.replace('#', '') || 'home';
+    history.replaceState({page: initialPage}, '', window.location.href); // Set initial state
+    handleState(initialPage);
+});
+
+
+// ===== UPDATED: NAVIGATION FUNCTIONS =====
+
+function showCGPA(){
+  handleState('cgpa');
+  history.pushState({page: 'cgpa'}, "CGPA Calculator", "#cgpa");
+}
+function showAttendance(){
+  handleState('attendance');
+  history.pushState({page: 'attendance'}, "Attendance Calculator", "#attendance");
+}
+function goHome(){
+  handleState('home');
+  history.pushState({page: 'home'}, "Home", window.location.pathname); // Cleans the URL
+}
+
+// ===== EXISTING FUNCTIONS (Unchanged from before) =====
+
 function loadSemesters() {
   const dept = document.getElementById('department').value;
   const scheme = document.getElementById('scheme').value;
-  
-  if (!dept || !scheme) {
-    alert("Please select both a department and a scheme.");
-    return;
-  }
-
-  // Determine the correct file to fetch based on the selected scheme
-  let fileName = '';
-  if (scheme === '2019') {
-    fileName = 'syllabus2019.json';
-  } else if (scheme === '2024') {
-    fileName = 'syllabus2024.json';
-  } else {
-    alert(`The selected scheme (${scheme}) is not supported yet.`);
-    return;
-  }
-
+  if (!dept || !scheme) { alert("Please select both a department and a scheme."); return; }
+  let fileName = (scheme === '2019') ? 'syllabus2019.json' : (scheme === '2024') ? 'syllabus2024.json' : '';
+  if (!fileName) { alert(`The selected scheme (${scheme}) is not supported yet.`); return; }
   fetch(fileName)
-    .then(res => {
-      if (!res.ok) throw new Error(`File ${fileName} not found. Make sure it's uploaded to your GitHub repository.`);
-      return res.json();
-    })
+    .then(res => { if (!res.ok) throw new Error(`File ${fileName} not found.`); return res.json(); })
     .then(data => {
       if (data[dept]) {
-        syllabusData = data[dept]; // Selects the data for the chosen department
+        syllabusData = data[dept];
         renderSemesters();
         document.getElementById('cgpaControls').style.display = 'block';
         document.getElementById('errorMsg').innerText = '';
       } else {
-        // Make the alert message dynamic
-        alert(`Syllabus for ${dept} (${scheme} Scheme) is not available in the data file.`);
+        alert(`Syllabus for ${dept} (${scheme} Scheme) is not available.`);
         document.getElementById('semesters').innerHTML = '';
         document.getElementById('cgpaControls').style.display = 'none';
       }
@@ -179,7 +196,7 @@ function renderSemesters(){
       row.className='subject-row';
       row.innerHTML=`
         <span>${sub.code} – ${sub.name} (${sub.credit}cr)</span>
-        <select id="${sem}_${i}">
+        <select id="${sem}_${i}" onchange="saveGrades()">
           <option value="">Grade</option>
           ${Object.keys(gradeMap).map(g=>`<option value="${g}">${g}</option>`).join('')}
         </select>`;
@@ -189,6 +206,42 @@ function renderSemesters(){
                     <div class="result" id="${sem}_sgpa">SGPA: -</div>`;
     container.appendChild(div);
   });
+  loadGrades();
+}
+
+function saveGrades() {
+    const gradesToSave = {};
+    Object.keys(syllabusData).forEach(sem => {
+        syllabusData[sem].forEach((sub, i) => {
+            const gradeEl = document.getElementById(`${sem}_${i}`);
+            if (gradeEl && gradeEl.value) {
+                gradesToSave[`${sem}_${i}`] = gradeEl.value;
+            }
+        });
+    });
+    localStorage.setItem('ktuGrades', JSON.stringify(gradesToSave));
+}
+
+function loadGrades() {
+    const savedGrades = JSON.parse(localStorage.getItem('ktuGrades'));
+    if (savedGrades) {
+        Object.keys(savedGrades).forEach(id => {
+            const gradeEl = document.getElementById(id);
+            if (gradeEl) {
+                gradeEl.value = savedGrades[id];
+            }
+        });
+    }
+}
+
+function clearGrades() {
+    if (confirm("Are you sure you want to clear all saved grades?")) {
+        localStorage.removeItem('ktuGrades');
+        document.getElementById('semesters').innerHTML = '';
+        document.getElementById('cgpaControls').style.display = 'none';
+        document.getElementById('cgpaResult').innerText = '';
+        alert("Grades cleared. Please load a department and scheme again.");
+    }
 }
 
 function calcSGPA(sem){
@@ -246,16 +299,13 @@ function shareResult(){
   });
 }
 
-// ===== Fixed Attendance Logic =====
 function calcAttendance(){
   let attended=parseInt(document.getElementById('attended').value);
   let total=parseInt(document.getElementById('total').value);
   let target=parseInt(document.getElementById('target').value);
   if(isNaN(attended)||isNaN(total)||total<=0){ alert("Enter valid numbers"); return; }
-
   let percent=(attended/total*100).toFixed(2);
   let result=`Current Attendance: ${percent}%\n`;
-
   if(percent >= target){
     let maxBunk = Math.floor((attended*100/target) - total);
     if(maxBunk < 0) maxBunk = 0;
@@ -265,7 +315,6 @@ function calcAttendance(){
     if(need < 0) need = 0;
     result+=`⚠️ You must attend the next ${need} classes to reach ${target}%.`;
   }
-
   document.getElementById('attendanceResult').innerText=result;
 }
 </script>
