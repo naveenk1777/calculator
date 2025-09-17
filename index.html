@@ -105,6 +105,7 @@ const gradeMap = {
 let syllabusData = {};
 let currentResults = {};
 
+// ===== Navigation Functions =====
 function showCGPA(){
   document.getElementById('homeScreen').style.display='none';
   document.getElementById('cgpaScreen').style.display='block';
@@ -119,6 +120,39 @@ function goHome(){
   document.getElementById('homeScreen').style.display='block';
 }
 
+// ===== NEW: LocalStorage Functions =====
+function saveGrade(selectElement) {
+  localStorage.setItem('grade_' + selectElement.id, selectElement.value);
+}
+
+function loadGrades() {
+  Object.keys(syllabusData).forEach(sem => {
+    syllabusData[sem].forEach((sub, i) => {
+      const gradeId = `${sem}_${i}`;
+      const savedGrade = localStorage.getItem('grade_' + gradeId);
+      if (savedGrade) {
+        document.getElementById(gradeId).value = savedGrade;
+      }
+    });
+  });
+}
+
+function clearGrades() {
+  if (confirm("Are you sure you want to clear all saved grades? This cannot be undone.")) {
+    Object.keys(syllabusData).forEach(sem => {
+      syllabusData[sem].forEach((sub, i) => {
+        const gradeId = `${sem}_${i}`;
+        localStorage.removeItem('grade_' + gradeId);
+      });
+    });
+    renderSemesters(); // Re-render to show cleared dropdowns
+    document.getElementById('cgpaResult').innerText = "";
+    Object.keys(currentResults).forEach(key => delete currentResults[key]);
+    alert("All saved grades have been cleared.");
+  }
+}
+
+// ===== CGPA Calculator Functions =====
 function loadSemesters(){
   const dept = document.getElementById('department').value;
   const scheme = document.getElementById('scheme').value;
@@ -131,6 +165,7 @@ function loadSemesters(){
     .then(data=>{
       syllabusData = data;
       renderSemesters();
+      loadGrades(); // MODIFIED: Load grades after rendering
       document.getElementById('cgpaControls').style.display='block';
       document.getElementById('errorMsg').innerText='';
     })
@@ -154,8 +189,7 @@ function renderSemesters(){
       row.className='subject-row';
       row.innerHTML=`
         <span>${sub.code} – ${sub.name} (${sub.credit}cr)</span>
-        <select id="${sem}_${i}">
-          <option value="">Grade</option>
+        <select id="${sem}_${i}" onchange="saveGrade(this)"> <option value="">Grade</option>
           ${Object.keys(gradeMap).map(g=>`<option>${g}</option>`).join('')}
         </select>`;
       div.appendChild(row);
@@ -219,7 +253,7 @@ function shareResult(){
   });
 }
 
-// ===== Fixed Attendance Logic =====
+// ===== Attendance Calculator Function =====
 function calcAttendance(){
   let attended=parseInt(document.getElementById('attended').value);
   let total=parseInt(document.getElementById('total').value);
@@ -245,3 +279,4 @@ function calcAttendance(){
 
 </body>
 </html>
+
