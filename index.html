@@ -220,23 +220,32 @@ function shareResult(){
 }
 
 function calcAttendance(){
-  let attended=parseInt(document.getElementById('attended').value);
-  let total=parseInt(document.getElementById('total').value);
-  let target=parseInt(document.getElementById('target').value);
-  if(isNaN(attended)||isNaN(total)||total<=0){ alert("Enter valid numbers"); return; }
-  let percent=(attended/total*100).toFixed(2);
-  let result=`Current Attendance: ${percent}%\n`;
-  if(percent>=target){
-    let maxBunk=Math.floor((attended*100/target)-total);
-    if(maxBunk<0) maxBunk=0;
-    result+=`✅ Safe. You can cut ${maxBunk} more classes.`;
-  } else {
-    let need=Math.ceil((target*total - attended*100)/(100-target));
-    result+=`⚠️ Below target. You must attend next ${need} classes.`;
+  let attended = parseInt(document.getElementById('attended').value);
+  let total = parseInt(document.getElementById('total').value);
+  let target = parseInt(document.getElementById('target').value);
+  if(isNaN(attended) || isNaN(total) || total<=0){ 
+    alert("Enter valid numbers"); return; 
   }
+
+  let percent = (attended / total * 100).toFixed(2);
+  let result = `Current Attendance: ${percent}%\n`;
+
+  if(percent >= target){
+    let maxBunk = Math.floor((attended*100/target) - total);
+    if(maxBunk < 0) maxBunk = 0;
+    result += `✅ You are safe. You can miss ${maxBunk} more classes.`;
+  } else {
+    let need = Math.ceil((target*total - 100*attended) / (100 - target));
+    if(need < 0) need = 0;
+    result += `⚠️ You must attend the next ${need} classes to reach ${target}%.`;
+  }
+
+  document.getElementById('attendanceResult').innerText = result;
+}
   document.getElementById('attendanceResult').innerText=result;
 }
 </script>
 
 </body>
 </html>
+
