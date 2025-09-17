@@ -11,12 +11,14 @@
   h2 { color:#004080; }
   .btn { margin:10px 5px; padding:10px 20px; font-size:16px; background:#004080; color:white; border:none; border-radius:6px; cursor:pointer; }
   .btn:hover { background:#003060; }
+  .btn:disabled { background:#ccc; cursor:not-allowed; }
   .input-group { margin:10px 0; }
   select, input { width:100%; padding:10px; font-size:16px; border:1px solid #ccc; border-radius:6px; }
   .subject-row { display:flex; gap:10px; margin-bottom:5px; }
   .subject-row span { flex:2; align-self:center; }
   .subject-row select { flex:1; }
   .result { margin-top:10px; padding:10px; background:#f0f8ff; border-left:4px solid #004080; white-space:pre-line; }
+  .error { color:red; font-weight:bold; margin-top:10px; }
   @media (max-width:600px){
     .subject-row { flex-direction:column; }
     .subject-row span, .subject-row select { width:100%; }
@@ -56,10 +58,13 @@
   </div>
   <button class="btn" onclick="loadSemesters()">Load</button>
   <div id="semesters"></div>
-  <button class="btn" onclick="calcCGPA()">Calculate Overall CGPA</button>
-  <button class="btn" onclick="shareResult()">Share</button>
-  <div class="result" id="cgpaResult"></div>
-  <div id="shareMsg" style="margin-top:5px;color:green;font-weight:bold;"></div>
+  <div id="cgpaControls" style="display:none;">
+    <button class="btn" id="calcBtn" onclick="calcCGPA()">Calculate Overall CGPA</button>
+    <button class="btn" id="shareBtn" onclick="shareResult()">Share Result</button>
+    <div class="result" id="cgpaResult"></div>
+    <div id="shareMsg" style="margin-top:5px;color:green;font-weight:bold;"></div>
+  </div>
+  <div id="errorMsg" class="error"></div>
   <button class="btn" onclick="goHome()">Back</button>
 </div>
 
@@ -89,7 +94,14 @@
 </div>
 
 <script>
-const gradeMap = { 'S':10, 'A+':9, 'A':8.5, 'B+':8, 'B':7, 'C':6, 'P':5, 'F':0 };
+// ===== Correct KTU 2019 Grading Map =====
+const gradeMap = { 
+  'S':10, 'A+':9.0, 'A':8.5, 
+  'B+':8.0, 'B':7.5, 'C+':7.0, 
+  'C':6.5, 'D':6.0, 'P':5.5, 
+  'F':0.0, 'FE':0.0, 'I':0.0 
+};
+
 let syllabusData = {};
 let currentResults = {};
 
@@ -112,10 +124,18 @@ function loadSemesters(){
   const scheme = document.getElementById('scheme').value;
   if(dept==='ECE' && scheme==='2019'){
     fetch('ece2019.json')
-    .then(res=>res.json())
+    .then(res=>{
+      if(!res.ok) throw new Error("File not found");
+      return res.json();
+    })
     .then(data=>{
       syllabusData = data;
       renderSemesters();
+      document.getElementById('cgpaControls').style.display='block';
+      document.getElementById('errorMsg').innerText='';
+    })
+    .catch(err=>{
+      document.getElementById('errorMsg').innerText="❌ Could not load syllabus data. Check file path or name.";
     });
   } else {
     alert("Only ECE 2019 is available now.");
@@ -125,6 +145,7 @@ function loadSemesters(){
 function renderSemesters(){
   let container=document.getElementById('semesters');
   container.innerHTML='';
+  currentResults={};
   Object.keys(syllabusData).forEach(sem=>{
     let div=document.createElement('div');
     div.innerHTML=`<h3>${sem}</h3>`;
@@ -135,9 +156,7 @@ function renderSemesters(){
         <span>${sub.code} – ${sub.name} (${sub.credit}cr)</span>
         <select id="${sem}_${i}">
           <option value="">Grade</option>
-          <option>S</option><option>A+</option><option>A</option>
-          <option>B+</option><option>B</option>
-          <option>C</option><option>P</option><option>F</option>
+          ${Object.keys(gradeMap).map(g=>`<option>${g}</option>`).join('')}
         </select>`;
       div.appendChild(row);
     });
