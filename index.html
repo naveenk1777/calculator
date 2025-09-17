@@ -3,21 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KTU Tools - CGPA & Attendance (ECE 2019)</title>
+<title>KTU Tools - ECE 2019</title>
 <style>
   body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; color:#333; }
   header { background:#004080; color:white; text-align:center; padding:15px; }
   .container { max-width:900px; margin:20px auto; padding:20px; background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
-  h2 { color:#004080; margin-top:0; }
-  .input-group { margin:10px 0; }
-  label { display:block; margin-bottom:5px; font-weight:bold; }
-  input, select { width:100%; padding:10px; font-size:16px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box; }
-  .btn { margin-top:10px; padding:10px 20px; font-size:16px; background:#004080; color:white; border:none; border-radius:6px; cursor:pointer; }
+  h2 { color:#004080; }
+  .btn { margin:10px 5px; padding:10px 20px; font-size:16px; background:#004080; color:white; border:none; border-radius:6px; cursor:pointer; }
   .btn:hover { background:#003060; }
-  .result { margin-top:10px; padding:10px; background:#f0f8ff; border-left:4px solid #004080; white-space:pre-line; }
+  .input-group { margin:10px 0; }
+  select, input { width:100%; padding:10px; font-size:16px; border:1px solid #ccc; border-radius:6px; }
   .subject-row { display:flex; gap:10px; margin-bottom:5px; }
   .subject-row span { flex:2; align-self:center; }
   .subject-row select { flex:1; }
+  .result { margin-top:10px; padding:10px; background:#f0f8ff; border-left:4px solid #004080; white-space:pre-line; }
   @media (max-width:600px){
     .subject-row { flex-direction:column; }
     .subject-row span, .subject-row select { width:100%; }
@@ -27,18 +26,44 @@
 <body>
 
 <header>
-  <h1>KTU ECE 2019 - CGPA & Attendance Calculator</h1>
+  <h1>KTU Tools</h1>
 </header>
 
-<div class="container" id="cgpaCalculator">
-  <h2>CGPA Calculator (ECE 2019 Scheme)</h2>
-  <div id="semesters"></div>
-  <button class="btn" onclick="shareResult()">Share Result</button>
-  <div class="result" id="cgpaResult"></div>
-  <div id="shareMsg" style="margin-top:5px;color:green;font-weight:bold;"></div>
+<div class="container" id="homeScreen">
+  <h2>Select a Calculator</h2>
+  <button class="btn" onclick="showCGPA()">CGPA Calculator</button>
+  <button class="btn" onclick="showAttendance()">Attendance Calculator</button>
 </div>
 
-<div class="container" id="attendanceCalculator">
+<div class="container" id="cgpaScreen" style="display:none;">
+  <h2>CGPA Calculator</h2>
+  <div class="input-group">
+    <label>Department</label>
+    <select id="department">
+      <option value="">-- Select Department --</option>
+      <option value="ECE">ECE</option>
+      <option value="EEE">EEE (Coming Soon)</option>
+      <option value="CSE">CSE (Coming Soon)</option>
+    </select>
+  </div>
+  <div class="input-group">
+    <label>Scheme</label>
+    <select id="scheme">
+      <option value="">-- Select Scheme --</option>
+      <option value="2019">2019</option>
+      <option value="2015">2015 (Coming Soon)</option>
+    </select>
+  </div>
+  <button class="btn" onclick="loadSemesters()">Load</button>
+  <div id="semesters"></div>
+  <button class="btn" onclick="calcCGPA()">Calculate Overall CGPA</button>
+  <button class="btn" onclick="shareResult()">Share</button>
+  <div class="result" id="cgpaResult"></div>
+  <div id="shareMsg" style="margin-top:5px;color:green;font-weight:bold;"></div>
+  <button class="btn" onclick="goHome()">Back</button>
+</div>
+
+<div class="container" id="attendanceScreen" style="display:none;">
   <h2>Attendance Calculator</h2>
   <div class="input-group">
     <label>Classes Attended</label>
@@ -58,102 +83,123 @@
       <option value="95">95%</option>
     </select>
   </div>
-  <button class="btn" onclick="calcAttendance()">Calculate Attendance</button>
+  <button class="btn" onclick="calcAttendance()">Calculate</button>
   <div class="result" id="attendanceResult"></div>
+  <button class="btn" onclick="goHome()">Back</button>
 </div>
 
 <script>
-// ===== Grading Map =====
-const gradeMap = { 'S':10, 'A':9, 'B':8, 'C':7, 'D':6, 'E':5, 'F':0 };
+const gradeMap = { 'S':10, 'A+':9, 'A':8.5, 'B+':8, 'B':7, 'C':6, 'P':5, 'F':0 };
+let syllabusData = {};
+let currentResults = {};
 
-// ===== ECE 2019 Scheme Subjects =====
-const ece2019 = {
-  "Semester 3":[
-    {name:"MAT 201 – PDE & Complex Analysis", credit:4},
-    {name:"ECT 201 – Solid State Devices", credit:4},
-    {name:"ECT 203 – Logic Circuit Design", credit:4},
-    {name:"ECT 205 – Network Theory", credit:4},
-    {name:"EST 200 – Design and Engineering", credit:2},
-    {name:"HUT 200 – Professional Ethics", credit:2},
-    {name:"MCN 201 – Sustainable Engineering", credit:0},
-    {name:"ECL 201 – Scientific Computing Lab", credit:2},
-    {name:"ECL 203 – Logic Design Lab", credit:2}
-  ]
-  // ⚡ Add Semester 1–8 here (same structure) when needed
-};
+function showCGPA(){
+  document.getElementById('homeScreen').style.display='none';
+  document.getElementById('cgpaScreen').style.display='block';
+}
+function showAttendance(){
+  document.getElementById('homeScreen').style.display='none';
+  document.getElementById('attendanceScreen').style.display='block';
+}
+function goHome(){
+  document.getElementById('cgpaScreen').style.display='none';
+  document.getElementById('attendanceScreen').style.display='none';
+  document.getElementById('homeScreen').style.display='block';
+}
 
-// ===== Render Semesters =====
+function loadSemesters(){
+  const dept = document.getElementById('department').value;
+  const scheme = document.getElementById('scheme').value;
+  if(dept==='ECE' && scheme==='2019'){
+    fetch('ece2019.json')
+    .then(res=>res.json())
+    .then(data=>{
+      syllabusData = data;
+      renderSemesters();
+    });
+  } else {
+    alert("Only ECE 2019 is available now.");
+  }
+}
+
 function renderSemesters(){
-  let container = document.getElementById('semesters');
-  container.innerHTML = '';
-  Object.keys(ece2019).forEach((sem, idx)=>{
-    let div = document.createElement('div');
-    div.innerHTML = `<h3>${sem}</h3>`;
-    ece2019[sem].forEach((sub,j)=>{
-      let row = document.createElement('div');
+  let container=document.getElementById('semesters');
+  container.innerHTML='';
+  Object.keys(syllabusData).forEach(sem=>{
+    let div=document.createElement('div');
+    div.innerHTML=`<h3>${sem}</h3>`;
+    syllabusData[sem].forEach((sub,i)=>{
+      let row=document.createElement('div');
       row.className='subject-row';
       row.innerHTML=`
-        <span>${sub.name} (${sub.credit}cr)</span>
-        <select onchange="calcSGPA('${sem}')">
+        <span>${sub.code} – ${sub.name} (${sub.credit}cr)</span>
+        <select id="${sem}_${i}">
           <option value="">Grade</option>
-          <option>S</option><option>A</option><option>B</option>
-          <option>C</option><option>D</option><option>E</option><option>F</option>
+          <option>S</option><option>A+</option><option>A</option>
+          <option>B+</option><option>B</option>
+          <option>C</option><option>P</option><option>F</option>
         </select>`;
       div.appendChild(row);
     });
-    div.innerHTML += `<div class="result" id="${sem}_sgpa">SGPA: -</div>`;
+    div.innerHTML+=`<button class="btn" onclick="calcSGPA('${sem}')">Calculate SGPA</button>
+                    <div class="result" id="${sem}_sgpa">SGPA: -</div>`;
     container.appendChild(div);
   });
 }
-renderSemesters();
 
-// ===== Calculate SGPA per semester & CGPA =====
 function calcSGPA(sem){
-  let rows = document.querySelectorAll(`#semesters h3:contains('${sem}') ~ .subject-row`);
+  let subjects=syllabusData[sem];
+  let points=0, credits=0;
+  subjects.forEach((sub,i)=>{
+    let grade=document.getElementById(`${sem}_${i}`).value;
+    if(grade && sub.credit>0){
+      points+=gradeMap[grade]*sub.credit;
+      credits+=sub.credit;
+    }
+  });
+  if(credits>0){
+    let sgpa=(points/credits).toFixed(2);
+    document.getElementById(`${sem}_sgpa`).innerText=`SGPA: ${sgpa}`;
+    currentResults[sem]=sgpa;
+  } else {
+    document.getElementById(`${sem}_sgpa`).innerText="SGPA: -";
+    delete currentResults[sem];
+  }
 }
-function calcAll(){
+
+function calcCGPA(){
   let totalPoints=0, totalCredits=0;
-  let output='';
-  Object.keys(ece2019).forEach(sem=>{
-    let semDiv = document.querySelector(`#semesters h3:contains('${sem}')`).parentNode;
-    let selects = semDiv.querySelectorAll('select');
-    let points=0, credits=0;
-    selects.forEach((sel,i)=>{
-      let grade=sel.value;
-      let credit=ece2019[sem][i].credit;
-      if(grade && credit>0){
-        points+=gradeMap[grade]*credit;
-        credits+=credit;
+  Object.keys(syllabusData).forEach(sem=>{
+    let subjects=syllabusData[sem];
+    subjects.forEach((sub,i)=>{
+      let grade=document.getElementById(`${sem}_${i}`)?.value;
+      if(grade && sub.credit>0){
+        totalPoints+=gradeMap[grade]*sub.credit;
+        totalCredits+=sub.credit;
       }
     });
-    if(credits>0){
-      let sgpa=(points/credits).toFixed(2);
-      semDiv.querySelector(`#${sem}_sgpa`).innerText=`SGPA: ${sgpa}`;
-      totalPoints+=points;
-      totalCredits+=credits;
-      output+=`${sem} SGPA: ${sgpa}\n`;
-    }
   });
   if(totalCredits>0){
     let cgpa=(totalPoints/totalCredits).toFixed(2);
     document.getElementById('cgpaResult').innerText=`Overall CGPA: ${cgpa}`;
-    return output+`Overall CGPA: ${cgpa}`;
+    currentResults['CGPA']=cgpa;
   } else {
-    document.getElementById('cgpaResult').innerText='Fill in grades to calculate CGPA';
-    return '';
+    document.getElementById('cgpaResult').innerText="Fill in grades to calculate CGPA";
   }
 }
 
-// ===== Share Result =====
 function shareResult(){
-  let text = calcAll();
-  if(!text){ alert("Please fill some grades first."); return; }
+  let text='';
+  Object.keys(currentResults).forEach(key=>{
+    if(key!=='CGPA'){ text+=`${key} SGPA: ${currentResults[key]}\n`; }
+  });
+  if(currentResults['CGPA']) text+=`Overall CGPA: ${currentResults['CGPA']}`;
+  if(text===''){ alert("Please calculate SGPA or CGPA first."); return; }
   navigator.clipboard.writeText(text).then(()=>{
     document.getElementById('shareMsg').innerText="Result copied to clipboard. You can paste and share it.";
   });
 }
 
-// ===== Attendance Calculator =====
 function calcAttendance(){
   let attended=parseInt(document.getElementById('attended').value);
   let total=parseInt(document.getElementById('total').value);
@@ -162,7 +208,7 @@ function calcAttendance(){
   let percent=(attended/total*100).toFixed(2);
   let result=`Current Attendance: ${percent}%\n`;
   if(percent>=target){
-    let maxBunk = Math.floor((attended*100/target)-total);
+    let maxBunk=Math.floor((attended*100/target)-total);
     if(maxBunk<0) maxBunk=0;
     result+=`✅ Safe. You can cut ${maxBunk} more classes.`;
   } else {
