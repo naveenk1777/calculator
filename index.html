@@ -5,25 +5,61 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KTU Tools</title>
 <style>
-  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; color:#333; }
-  header { background:#004080; color:white; text-align:center; padding:15px; }
-  .container { max-width:900px; margin:20px auto; padding:20px; background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; color:#333; transition: background 0.3s, color 0.3s; }
+  header { background:#004080; color:white; text-align:center; padding:15px; position: relative; }
+  #darkModeToggle { cursor: pointer; position: absolute; right: 20px; top: 15px; font-size: 24px; user-select: none; }
+  .container { max-width:900px; margin:20px auto; padding:20px; background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); transition: background 0.3s, color 0.3s; }
   h2 { color:#004080; }
-  .btn { margin:10px 5px; padding:10px 20px; font-size:16px; background:#004080; color:white; border:none; border-radius:6px; cursor:pointer; }
+  .btn { margin:10px 5px; padding:10px 20px; font-size:16px; background:#004080; color:white; border:none; border-radius:6px; cursor:pointer; transition: background 0.2s; }
   .btn:hover { background:#003060; }
   .btn-danger { background: #d9534f; }
   .btn-danger:hover { background: #c9302c; }
   .btn:disabled { background:#ccc; cursor:not-allowed; }
   .input-group { margin:10px 0; }
-  select, input { width:100%; padding:10px; font-size:16px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box; }
+  select, input { width:100%; padding:10px; font-size:16px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
   .subject-row { display:flex; gap:10px; margin-bottom:5px; align-items: center; }
   .subject-row span { flex:2; align-self:center; }
   .subject-row select { flex:1; }
-  .result { margin-top:10px; padding:10px; background:#f0f8ff; border-left:4px solid #004080; white-space:pre-line; }
+  .result { margin-top:10px; padding:10px; background:#f0f8ff; border-left:4px solid #004080; white-space:pre-line; transition: background 0.3s, color 0.3s; }
   .error { color:red; font-weight:bold; margin-top:10px; }
+  #floatingCgpa { position: fixed; bottom: 20px; right: 20px; background: #004080; color: white; padding: 12px 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); z-index: 1000; display: none; font-weight: bold; cursor: pointer; transition: background 0.3s, color 0.3s; }
   @media (max-width:600px){
     .subject-row { flex-direction:column; align-items: stretch; }
     .subject-row span, .subject-row select { width:100%; }
+  }
+
+  /* DARK MODE */
+  body.dark-mode {
+    background: #121212;
+    color: #e0e0e0;
+  }
+  body.dark-mode header {
+    background: #1a1a1a;
+    color: #ffd700;
+  }
+  body.dark-mode .container {
+    background: #1e1e1e;
+    color: #e0e0e0;
+  }
+  body.dark-mode select, 
+  body.dark-mode input {
+    background: #2c2c2c;
+    color: #e0e0e0;
+    border: 1px solid #555;
+  }
+  body.dark-mode .btn {
+    background: #3333ff;
+    color: #fff;
+  }
+  body.dark-mode .btn:hover {
+    background: #0000cc;
+  }
+  body.dark-mode .result {
+    background: #222244;
+    border-left: 4px solid #ffcc00;
+  }
+  body.dark-mode .error {
+    color: #ff6b6b;
   }
 </style>
 </head>
@@ -31,6 +67,7 @@
 
 <header>
   <h1>KTU Tools</h1>
+  <span id="darkModeToggle" title="Toggle Dark Mode">💡</span>
 </header>
 
 <div class="container" id="homeScreen">
@@ -99,6 +136,9 @@
   <button class="btn" onclick="goHome()">Back</button>
 </div>
 
+<!-- FLOATING CGPA -->
+<div id="floatingCgpa">CGPA: -</div>
+
 <script>
 const gradeMap = { 
   'S':10, 'A+':9.0, 'A':8.5, 'B+':8.0, 'B':7.5, 'C+':7.0, 
@@ -107,96 +147,74 @@ const gradeMap = {
 let syllabusData = {};
 let currentResults = {};
 
-// ===== NEW: HISTORY AND PAGE STATE MANAGEMENT =====
+// ===== DARK MODE =====
+const darkModeToggle = document.getElementById('darkModeToggle');
+darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'on' : 'off');
+});
+if(localStorage.getItem('darkMode') === 'on') document.body.classList.add('dark-mode');
 
-// This function controls which "page" is visible
+// ===== PAGE STATE =====
 function handleState(page) {
     document.getElementById('homeScreen').style.display = 'none';
     document.getElementById('cgpaScreen').style.display = 'none';
     document.getElementById('attendanceScreen').style.display = 'none';
 
-    if (page === 'cgpa') {
-        document.getElementById('cgpaScreen').style.display = 'block';
-    } else if (page === 'attendance') {
-        document.getElementById('attendanceScreen').style.display = 'block';
-    } else { // Default to home
-        document.getElementById('homeScreen').style.display = 'block';
-    }
+    if (page === 'cgpa') document.getElementById('cgpaScreen').style.display = 'block';
+    else if (page === 'attendance') document.getElementById('attendanceScreen').style.display = 'block';
+    else document.getElementById('homeScreen').style.display = 'block';
 }
-
-// This listens for the browser's back/forward button clicks
 window.onpopstate = function(event) {
-    if (event.state && event.state.page) {
-        handleState(event.state.page);
-    } else {
-        handleState('home');
-    }
+    if(event.state && event.state.page) handleState(event.state.page);
+    else handleState('home');
 };
-
-// Initial page load handling
 document.addEventListener('DOMContentLoaded', () => {
     let initialPage = window.location.hash.replace('#', '') || 'home';
-    history.replaceState({page: initialPage}, '', window.location.href); // Set initial state
+    history.replaceState({page: initialPage}, '', window.location.href);
     handleState(initialPage);
 });
 
+// ===== NAVIGATION =====
+function showCGPA(){ handleState('cgpa'); history.pushState({page:'cgpa'}, "CGPA Calculator", "#cgpa"); }
+function showAttendance(){ handleState('attendance'); history.pushState({page:'attendance'}, "Attendance Calculator", "#attendance"); }
+function goHome(){ handleState('home'); history.pushState({page:'home'}, "Home", window.location.pathname); }
 
-// ===== UPDATED: NAVIGATION FUNCTIONS =====
-
-function showCGPA(){
-  handleState('cgpa');
-  history.pushState({page: 'cgpa'}, "CGPA Calculator", "#cgpa");
-}
-function showAttendance(){
-  handleState('attendance');
-  history.pushState({page: 'attendance'}, "Attendance Calculator", "#attendance");
-}
-function goHome(){
-  handleState('home');
-  history.pushState({page: 'home'}, "Home", window.location.pathname); // Cleans the URL
-}
-
-// ===== EXISTING FUNCTIONS (Unchanged from before) =====
-
+// ===== LOAD SEMESTERS =====
 function loadSemesters() {
   const dept = document.getElementById('department').value;
   const scheme = document.getElementById('scheme').value;
   if (!dept || !scheme) { alert("Please select both a department and a scheme."); return; }
-  let fileName = (scheme === '2019') ? 'syllabus2019.json' : (scheme === '2024') ? 'syllabus2024.json' : '';
-  if (!fileName) { alert(`The selected scheme (${scheme}) is not supported yet.`); return; }
+  let fileName = (scheme==='2019')?'syllabus2019.json':(scheme==='2024')?'syllabus2024.json':'';
+  if(!fileName){ alert(`The selected scheme (${scheme}) is not supported yet.`); return; }
   fetch(fileName)
-    .then(res => { if (!res.ok) throw new Error(`File ${fileName} not found.`); return res.json(); })
-    .then(data => {
-      if (data[dept]) {
-        syllabusData = data[dept];
+    .then(res=>{ if(!res.ok) throw new Error(`File ${fileName} not found.`); return res.json(); })
+    .then(data=>{
+      if(data[dept]){
+        syllabusData=data[dept];
         renderSemesters();
-        document.getElementById('cgpaControls').style.display = 'block';
-        document.getElementById('errorMsg').innerText = '';
+        document.getElementById('cgpaControls').style.display='block';
+        document.getElementById('errorMsg').innerText='';
       } else {
-        alert(`Syllabus for ${dept} (${scheme} Scheme) is not available.`);
-        document.getElementById('semesters').innerHTML = '';
-        document.getElementById('cgpaControls').style.display = 'none';
+        alert(`Syllabus for ${dept} (${scheme}) is not available.`);
+        document.getElementById('semesters').innerHTML='';
+        document.getElementById('cgpaControls').style.display='none';
       }
     })
-    .catch(err => {
-      console.error(err);
-      document.getElementById('errorMsg').innerText = `❌ Could not load syllabus data. ${err.message}`;
-    });
+    .catch(err=>{ console.error(err); document.getElementById('errorMsg').innerText=`❌ Could not load syllabus data. ${err.message}`; });
 }
 
+// ===== RENDER SEMESTERS =====
 function renderSemesters(){
   let container=document.getElementById('semesters');
-  container.innerHTML='';
-  currentResults={};
+  container.innerHTML=''; currentResults={};
   Object.keys(syllabusData).forEach(sem=>{
     let div=document.createElement('div');
     div.innerHTML=`<h3>${sem}</h3>`;
     syllabusData[sem].forEach((sub,i)=>{
-      let row=document.createElement('div');
-      row.className='subject-row';
-      row.innerHTML=`
-        <span>${sub.code} – ${sub.name} (${sub.credit}cr)</span>
-        <select id="${sem}_${i}" onchange="saveGrades()">
+      let row=document.createElement('div'); row.className='subject-row';
+      row.innerHTML=`<span>${sub.code} – ${sub.name} (${sub.credit}cr)</span>
+        <select id="${sem}_${i}" onchange="saveGrades(); calcSGPA('${sem}')">
           <option value="">Grade</option>
           ${Object.keys(gradeMap).map(g=>`<option value="${g}">${g}</option>`).join('')}
         </select>`;
@@ -209,96 +227,101 @@ function renderSemesters(){
   loadGrades();
 }
 
+// ===== SAVE / LOAD GRADES =====
 function saveGrades() {
-    const gradesToSave = {};
-    Object.keys(syllabusData).forEach(sem => {
-        syllabusData[sem].forEach((sub, i) => {
-            const gradeEl = document.getElementById(`${sem}_${i}`);
-            if (gradeEl && gradeEl.value) {
-                gradesToSave[`${sem}_${i}`] = gradeEl.value;
-            }
-        });
+  const gradesToSave = {};
+  Object.keys(syllabusData).forEach(sem=>{
+    syllabusData[sem].forEach((sub,i)=>{
+      const gradeEl=document.getElementById(`${sem}_${i}`);
+      if(gradeEl && gradeEl.value) gradesToSave[`${sem}_${i}`]=gradeEl.value;
     });
-    localStorage.setItem('ktuGrades', JSON.stringify(gradesToSave));
+  });
+  localStorage.setItem('ktuGrades', JSON.stringify(gradesToSave));
 }
-
 function loadGrades() {
-    const savedGrades = JSON.parse(localStorage.getItem('ktuGrades'));
-    if (savedGrades) {
-        Object.keys(savedGrades).forEach(id => {
-            const gradeEl = document.getElementById(id);
-            if (gradeEl) {
-                gradeEl.value = savedGrades[id];
-            }
-        });
-    }
+  const savedGrades=JSON.parse(localStorage.getItem('ktuGrades'));
+  if(savedGrades) Object.keys(savedGrades).forEach(id=>{
+    const gradeEl=document.getElementById(id);
+    if(gradeEl) gradeEl.value=savedGrades[id];
+  });
 }
 
+// ===== CLEAR =====
 function clearGrades() {
-    if (confirm("Are you sure you want to clear all saved grades?")) {
-        localStorage.removeItem('ktuGrades');
-        document.getElementById('semesters').innerHTML = '';
-        document.getElementById('cgpaControls').style.display = 'none';
-        document.getElementById('cgpaResult').innerText = '';
-        alert("Grades cleared. Please load a department and scheme again.");
-    }
+  if(confirm("Are you sure you want to clear all saved grades?")){
+    localStorage.removeItem('ktuGrades');
+    document.getElementById('semesters').innerHTML='';
+    document.getElementById('cgpaControls').style.display='none';
+    document.getElementById('cgpaResult').innerText='';
+    document.getElementById('floatingCgpa').style.display='none';
+    alert("Grades cleared. Please load a department and scheme again.");
+  }
 }
 
+// ===== CALCULATE SGPA / CGPA =====
 function calcSGPA(sem){
-  let subjects=syllabusData[sem];
-  let points=0, credits=0;
+  let subjects=syllabusData[sem], points=0, credits=0;
   subjects.forEach((sub,i)=>{
     let grade=document.getElementById(`${sem}_${i}`).value;
-    if(grade && sub.credit>0){
-      points+=gradeMap[grade]*sub.credit;
-      credits+=sub.credit;
-    }
+    if(grade && sub.credit>0){ points+=gradeMap[grade]*sub.credit; credits+=sub.credit; }
   });
   if(credits>0){
     let sgpa=(points/credits).toFixed(2);
     document.getElementById(`${sem}_sgpa`).innerText=`SGPA: ${sgpa}`;
     currentResults[sem]=sgpa;
+    updateFloatingCGPA();
   } else {
     document.getElementById(`${sem}_sgpa`).innerText="SGPA: -";
     delete currentResults[sem];
+    updateFloatingCGPA();
   }
 }
 
 function calcCGPA(){
   let totalPoints=0, totalCredits=0;
   Object.keys(syllabusData).forEach(sem=>{
-    let subjects=syllabusData[sem];
-    subjects.forEach((sub,i)=>{
+    syllabusData[sem].forEach((sub,i)=>{
       let grade=document.getElementById(`${sem}_${i}`)?.value;
-      if(grade && sub.credit>0){
-        totalPoints+=gradeMap[grade]*sub.credit;
-        totalCredits+=sub.credit;
-      }
+      if(grade && sub.credit>0){ totalPoints+=gradeMap[grade]*sub.credit; totalCredits+=sub.credit; }
     });
   });
   if(totalCredits>0){
     let cgpa=(totalPoints/totalCredits).toFixed(2);
     document.getElementById('cgpaResult').innerText=`Overall CGPA: ${cgpa}`;
     currentResults['CGPA']=cgpa;
-  } else {
-    document.getElementById('cgpaResult').innerText="Fill in grades to calculate CGPA";
-  }
+    updateFloatingCGPA();
+  } else document.getElementById('cgpaResult').innerText="Fill in grades to calculate CGPA";
 }
 
+// ===== FLOATING CGPA =====
+function updateFloatingCGPA(){
+  const floatDiv=document.getElementById('floatingCgpa');
+  let totalPoints=0, totalCredits=0;
+  Object.keys(syllabusData).forEach(sem=>{
+    syllabusData[sem].forEach((sub,i)=>{
+      const grade=document.getElementById(`${sem}_${i}`)?.value;
+      if(grade && sub.credit>0){ totalPoints+=gradeMap[grade]*sub.credit; totalCredits+=sub.credit; }
+    });
+  });
+  if(totalCredits>0){
+    const cgpa=(totalPoints/totalCredits).toFixed(2);
+    floatDiv.innerText=`CGPA: ${cgpa}`;
+    floatDiv.style.display='block';
+    currentResults['CGPA']=cgpa;
+  } else { floatDiv.innerText="CGPA: -"; floatDiv.style.display='none'; }
+}
+document.getElementById('floatingCgpa').onclick = ()=>{ document.getElementById('cgpaResult').scrollIntoView({behavior:'smooth'}); };
+
+// ===== SHARE =====
 function shareResult(){
   let text='';
-  Object.keys(currentResults).forEach(key=>{
-    if(key!=='CGPA'){ text+=`${key} SGPA: ${currentResults[key]}\n`; }
-  });
+  Object.keys(currentResults).forEach(key=>{ if(key!=='CGPA') text+=`${key} SGPA: ${currentResults[key]}\n`; });
   if(currentResults['CGPA']) text+=`Overall CGPA: ${currentResults['CGPA']}`;
   if(text===''){ alert("Please calculate SGPA or CGPA first."); return; }
-  navigator.clipboard.writeText(text).then(()=>{
-    document.getElementById('shareMsg').innerText="✅ Result copied to clipboard!";
-  }, ()=>{
-    document.getElementById('shareMsg').innerText="❌ Failed to copy.";
-  });
+  navigator.clipboard.writeText(text).then(()=>{ document.getElementById('shareMsg').innerText="✅ Result copied to clipboard!"; }, ()=>{ document.getElementById('shareMsg').innerText="❌ Failed to copy."; });
 }
 
+// ===== ATTENDANCE =====
 function calcAttendance(){
   let attended=parseInt(document.getElementById('attended').value);
   let total=parseInt(document.getElementById('total').value);
@@ -307,12 +330,10 @@ function calcAttendance(){
   let percent=(attended/total*100).toFixed(2);
   let result=`Current Attendance: ${percent}%\n`;
   if(percent >= target){
-    let maxBunk = Math.floor((attended*100/target) - total);
-    if(maxBunk < 0) maxBunk = 0;
+    let maxBunk = Math.floor((attended*100/target) - total); if(maxBunk<0) maxBunk=0;
     result+=`✅ You are safe. You can miss ${maxBunk} more classes.`;
   } else {
-    let need = Math.ceil((target*total - 100*attended) / (100 - target));
-    if(need < 0) need = 0;
+    let need = Math.ceil((target*total - 100*attended)/(100-target)); if(need<0) need=0;
     result+=`⚠️ You must attend the next ${need} classes to reach ${target}%.`;
   }
   document.getElementById('attendanceResult').innerText=result;
